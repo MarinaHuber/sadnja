@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Protiv sječe — Pula</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+/* Layout: protest-poster broadsheet — ink on paper, forest green action color, red stamp for the fight */
+:root{
+  --paper:#f7f5ef;
+  --ink:#191d18;
+  --green:#1e5c33;
+  --green-bright:#2e8b4f;
+  --red:#b3271e;
+  --muted:#5c615a;
+  --line:#d8d4c8;
+  --card:#fffdf7;
+  --display:"Anton", "Arial Narrow", sans-serif;
+  --body:"Work Sans", system-ui, sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;padding:0}
+section[id]{scroll-margin-top:64px}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.6;
+}
+h1,h2,h3{font-family:var(--display); font-weight:400; letter-spacing:.01em; text-wrap:balance; margin:0}
+a{color:var(--green)}
+.wrap{max-width:1100px; margin:0 auto; padding-inline:max(20px, env(safe-area-inset-left,0px)) }
+section{padding-block:72px}
+.eyebrow{
+  font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--red); margin-bottom:10px;
+}
+.section-title{font-size:clamp(34px,5vw,54px); text-transform:uppercase; line-height:1.05; margin-bottom:18px}
+.lede{max-width:62ch; color:var(--muted); font-size:18px}
+
+/* ---------- top bar ---------- */
+header.bar{
+  position:sticky; top:0; z-index:1200; background:var(--ink); color:var(--paper);
+  border-bottom:3px solid var(--green-bright);
+}
+header.bar .wrap{display:flex; align-items:center; gap:22px; min-height:56px; flex-wrap:wrap}
+.logo{display:flex; align-items:center; gap:10px; font-family:var(--display); font-size:20px; text-transform:uppercase; letter-spacing:.06em; color:var(--paper); text-decoration:none}
+.logo img{width:38px; height:38px; border-radius:50%; mix-blend-mode:screen}
+.logo span{color:var(--green-bright)}
+nav{display:flex; gap:18px; flex-wrap:wrap; margin-left:auto}
+nav a{color:var(--paper); text-decoration:none; font-size:14px; font-weight:600; letter-spacing:.05em; text-transform:uppercase; opacity:.85}
+nav a:hover{opacity:1; color:var(--green-bright)}
+nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 14px; opacity:1}
+
+/* ---------- hero: full-bleed satellite view zoomed to Pula (radio.garden style) ---------- */
+.hero{position:relative; background:var(--ink); color:var(--paper); overflow:hidden}
+#hero-map{position:absolute; inset:0; z-index:0; background:#0c1c2b}
+.hero-shade{position:absolute; inset:0; z-index:400; pointer-events:none;
+  background:linear-gradient(90deg, rgba(13,17,13,.94) 0%, rgba(13,17,13,.82) 38%, rgba(13,17,13,.25) 72%, rgba(13,17,13,.05) 100%)}
+.hero .wrap{position:relative; z-index:500; padding-block:88px 96px; max-width:1100px}
+.hero-coords{position:absolute; right:18px; bottom:14px; z-index:500;
+  background:rgba(13,17,13,.75); color:#cfe0cc; font-size:12px; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; padding:6px 12px}
+.reticle-icon{border:2.5px solid #3ce07a; border-radius:50%;
+  animation:ret 2.4s ease-in-out infinite}
+@keyframes ret{
+  0%,100%{box-shadow:0 0 0 1px rgba(0,0,0,.35), inset 0 0 14px rgba(60,224,122,.25)}
+  50%{box-shadow:0 0 0 7px rgba(60,224,122,.18), inset 0 0 22px rgba(60,224,122,.45)}
+}
+.plant-dot{border-radius:50%; background:#3ce07a; box-shadow:0 0 6px rgba(60,224,122,.9)}
+.hero h1{font-size:clamp(46px,7vw,92px); line-height:.98; text-transform:uppercase}
+.hero h1 em{font-style:normal; color:var(--green-bright)}
+.hero h1 .strike{position:relative; white-space:nowrap}
+.hero h1 .strike::after{content:""; position:absolute; left:-2%; right:-2%; top:52%; height:.09em; background:var(--red); transform:rotate(-2deg)}
+.hero p{max-width:52ch; color:#c8cbc3; font-size:18px; margin:22px 0 30px}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap}
+.btn{
+  display:inline-block; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-size:15px;
+  padding:14px 26px; text-decoration:none; border:2px solid var(--green-bright);
+}
+.btn.primary{background:var(--green-bright); color:var(--ink)}
+.btn.primary:hover{background:#3aa05f}
+.btn.ghost{color:var(--paper)}
+.btn.ghost:hover{background:rgba(46,139,79,.18)}
+.hero-stats{display:flex; gap:0; margin-top:48px; border:1px solid #3a3f38; flex-wrap:wrap; max-width:620px;
+  background:rgba(13,17,13,.55); backdrop-filter:blur(2px)}
+.hero-stats .stat{flex:1 1 140px; padding:18px 22px; border-right:1px solid #3a3f38}
+.hero-stats .stat:last-child{border-right:0}
+.stat b{display:block; font-family:var(--display); font-size:38px; font-weight:400; color:var(--green-bright); font-variant-numeric:tabular-nums}
+.stat span{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#9aa095}
+
+/* ---------- map section ---------- */
+#map{height:520px; border:3px solid var(--ink); background:#dfe8dc}
+.map-grid{display:grid; grid-template-columns:2fr 1fr; gap:28px; align-items:start}
+.legend{background:var(--card); border:1px solid var(--line); padding:20px}
+.legend h3{font-size:18px; text-transform:uppercase; margin-bottom:12px}
+.legend ul{list-style:none; margin:0; padding:0; display:grid; gap:8px}
+.legend li{display:flex; align-items:baseline; gap:10px; font-size:15px}
+.legend li i{font-style:normal; font-size:18px}
+.legend li small{color:var(--muted); font-style:italic}
+.map-note{font-size:13px; color:var(--muted); margin-top:10px}
+
+.zone-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:34px}
+.zone-card{background:var(--card); border:1px solid var(--line); border-top:4px solid var(--green); padding:18px 18px 16px; display:flex; flex-direction:column; gap:10px}
+.zone-card h3{font-size:22px; text-transform:uppercase}
+.zone-card .desc{font-size:14px; color:var(--muted); min-height:0}
+.progress{height:10px; background:#e7e3d6; position:relative; overflow:hidden}
+.progress b{position:absolute; inset:0 auto 0 0; background:var(--green-bright); display:block}
+.zone-card .nums{display:flex; justify-content:space-between; font-size:13px; font-weight:600; letter-spacing:.03em}
+.zone-card .nums .pct{color:var(--green)}
+.tree-grid{line-height:1.35; font-size:15px; letter-spacing:2px; word-break:break-all}
+.tree-grid span{cursor:default}
+
+/* ---------- donation ---------- */
+.donate{background:var(--green); color:#f2f6ef}
+.donate .eyebrow{color:#ffd23f}
+.donate .lede{color:#cfe0cc}
+.tiers{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin:34px 0 10px}
+.tier{background:#174727; border:2px solid #2e8b4f; padding:20px; cursor:pointer; transition:transform .12s ease, background .12s ease}
+.tier:hover{background:#1d5a32; transform:translateY(-3px)}
+.tier.active{background:var(--paper); color:var(--ink); border-color:var(--paper)}
+.tier b{display:block; font-family:var(--display); font-size:34px; font-weight:400}
+.tier .t-label{font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:.08em; margin-top:4px}
+.tier p{font-size:13.5px; margin:8px 0 0; opacity:.85}
+.pay-box{background:#174727; border:1px dashed #4caf6f; padding:22px; margin-top:22px; display:grid; gap:10px}
+.pay-box .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+.pay-box label{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#9fd0ab; min-width:90px}
+.pay-box code{font-size:17px; background:transparent; color:#fff; letter-spacing:.04em}
+.copy-btn{background:transparent; border:1px solid #4caf6f; color:#cfe0cc; font-size:12px; padding:4px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em}
+.copy-btn:hover{background:#2e8b4f; color:var(--ink)}
+.monthly-note{font-size:14px; color:#cfe0cc; margin-top:16px; max-width:70ch}
+
+/* ---------- legal ---------- */
+.legal-list{display:grid; gap:0; border:1px solid var(--line); background:var(--card); margin-top:30px}
+.doc{display:grid; grid-template-columns:110px 1fr auto; gap:18px; padding:20px 22px; border-bottom:1px solid var(--line); align-items:start}
+.doc:last-child{border-bottom:0}
+.doc time{font-size:13px; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; padding-top:3px}
+.doc h3{font-size:18px; font-family:var(--body); font-weight:700; margin-bottom:4px}
+.doc p{margin:0; font-size:14.5px; color:var(--muted); max-width:70ch}
+.doc .actions{display:flex; flex-direction:column; gap:8px; align-items:flex-end}
+.badge{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border:1.5px solid}
+.badge.dobiveno{color:var(--green); border-color:var(--green)}
+.badge.predano{color:#8a6d1a; border-color:#c7a62e}
+.badge.u-tijeku{color:var(--red); border-color:var(--red)}
+.doc a.dl{font-size:13px; font-weight:600}
+
+/* ---------- footer ---------- */
+footer{background:var(--ink); color:#9aa095; padding-block:40px; font-size:14px}
+footer .wrap{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
+footer a{color:var(--green-bright)}
+
+.leaflet-popup-content{font-family:var(--body)}
+.popup-title{font-weight:700; font-size:15px; margin-bottom:4px}
+.popup-trees{font-size:14px; line-height:1.5}
+.popup-pct{font-weight:700; color:var(--green)}
+
+@media (max-width:860px){
+  .hero .wrap{padding-block:64px 72px}
+  .map-grid{grid-template-columns:1fr}
+  .doc{grid-template-columns:1fr; gap:8px}
+  .doc .actions{flex-direction:row; align-items:center}
+  section{padding-block:52px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important; transition:none !important}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="#top"><img src="images/ps-logo.jpg" alt="PS! logo">Protiv <span>sječe</span> · Pula</a>
+    <nav>
+      <a href="#karta">Karta sadnje</a>
+      <a href="#donacije" class="donate-link">Doniraj</a>
+      <a href="#dokumenti">Pravna bitka</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <div id="hero-map" aria-hidden="true"></div>
+  <div class="hero-shade"></div>
+  <span class="hero-coords">44°53′ N · 13°51′ E — Veli Vrh, Pula</span>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Građanska inicijativa · Pula, Istra</p>
+      <h1>Gdje su <span class="strike">rušili</span>,<br>mi <em>sadimo</em>.</h1>
+      <p>Vraćamo zelenilo na posječene i zapuštene prostore sjeverne Pule — Veli Vrh i Padulj. Svaka donirana sadnica završi u zemlji, a svako posađeno stablo vidite na karti ispod. Zemljište branimo i na terenu i na sudu.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#donacije">Doniraj sadnicu</a>
+        <a class="btn ghost" href="#karta">Pogledaj kartu</a>
+      </div>
+      <div class="hero-stats" id="hero-stats"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAP ============ -->
+<section id="karta">
+  <div class="wrap">
+    <p class="eyebrow">Živa karta</p>
+    <h2 class="section-title">Karta sadnje — Pula</h2>
+    <p class="lede">Zone se na karti pune zelenom bojom kako sadnja napreduje. Kliknite zonu za broj stabala po vrsti. Podaci se ažuriraju nakon svake akcije — jedno stablo, jedan simbol.</p>
+    <div class="map-grid" style="margin-top:30px">
+      <div id="map"></div>
+      <aside class="legend">
+        <h3>Vrste koje sadimo</h3>
+        <ul id="legend-list"></ul>
+        <p class="map-note">Granice zona su približne i služe za orijentaciju. Intenzitet zelene = postotak ostvarenog cilja.</p>
+      </aside>
+    </div>
+    <div class="zone-cards" id="zone-cards"></div>
+  </div>
+</section>
+
+<!-- ============ DONATE ============ -->
+<section class="donate" id="donacije">
+  <div class="wrap">
+    <p class="eyebrow">Donacije</p>
+    <h2 class="section-title">Jedna sadnica — 6 €</h2>
+    <p class="lede">Donacije pokrivaju sadnice iz lokalnih rasadnika, kolce, zaštitu od divljači i vodu za prvo ljeto. Objavljujemo svaki trošak — financijski izvještaj je među dokumentima ispod.</p>
+    <div class="tiers" id="tiers"></div>
+    <div class="pay-box">
+      <div class="row"><label>Primatelj</label> <code id="bank-holder"></code></div>
+      <div class="row"><label>IBAN</label> <code id="bank-iban"></code> <button class="copy-btn" data-copy="iban">Kopiraj</button></div>
+      <div class="row"><label>Opis</label> <code id="bank-desc"></code></div>
+      <div class="row"><label>Iznos</label> <code id="bank-amount">6,00 €</code></div>
+    </div>
+    <p class="monthly-note">Želite donirati mjesečno ili donirati veći iznos za cijeli šumarak? Pišite nam na <strong>protivsjece.pula@gmail.com</strong> — dogovaramo i sadnju s posvetom.</p>
+  </div>
+</section>
+
+<!-- ============ LEGAL ============ -->
+<section id="dokumenti">
+  <div class="wrap">
+    <p class="eyebrow">Pravna bitka</p>
+    <h2 class="section-title">Dokumenti o zemljištu</h2>
+    <p class="lede">Teritorij za koji se borimo javno je dobro. Ovdje objavljujemo sve: katastarske izvode, primjedbe u javnim raspravama, tužbe i rješenja — da svaki građanin može provjeriti na čemu smo.</p>
+    <div class="legal-list" id="legal-list"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 Udruga Protiv sječe — Pula · <a href="#dokumenti">Transparentnost</a></div>
+    <div>Pridružite se sljedećoj sadnji: <strong>svake subote u 9 h</strong>, okretište Veli Vrh.</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="data.js"></script>
+<script>
+/* ============ helpers ============ */
+const sum = o => Object.values(o).reduce((a,b)=>a+b,0);
+const totalPlanted = ZONES.reduce((a,z)=>a+sum(z.planted),0);
+const totalGoal = ZONES.reduce((a,z)=>a+z.goal,0);
+
+/* ============ hero stats (count-up, from HERO_STATS in data.js) ============ */
+function countUp(el, target, suffix=""){
+  const dur = 1200, t0 = performance.now();
+  function tick(t){
+    const p = Math.min(1,(t-t0)/dur), eased = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(target*eased).toLocaleString("hr-HR") + suffix;
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+document.getElementById("hero-stats").innerHTML = HERO_STATS.map((s,i)=>
+  `<div class="stat"><b id="hstat-${i}">0</b><span>${s.label}</span></div>`).join("");
+HERO_STATS.forEach((s,i)=> countUp(document.getElementById(`hstat-${i}`), s.value, s.suffix||""));
+
+/* ============ hero: satellite backdrop zoomed to Pula (radio.garden look) ============ */
+(function heroGlobe(){
+  const heroMap = L.map("hero-map", {
+    zoomControl:false, dragging:false, scrollWheelZoom:false, doubleClickZoom:false,
+    boxZoom:false, keyboard:false, touchZoom:false, attributionControl:false
+  }).setView([44.889, 13.805], 13);
+
+  L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
+    maxZoom: 18
+  }).addTo(heroMap);
+
+  /* green reticle on Pula */
+  L.marker([44.892, 13.853], {
+    interactive:false,
+    icon: L.divIcon({className:"reticle-icon", iconSize:[96,96]})
+  }).addTo(heroMap);
+
+  /* one green dot per ~10 planted trees, scattered inside each zone */
+  function jitter(c, r){ return [c[0] + (Math.random()-0.5)*r, c[1] + (Math.random()-0.5)*r*1.4]; }
+  ZONES.forEach(z => {
+    const dots = Math.round(sum(z.planted)/10);   /* none planted yet → no dots */
+    for(let i=0;i<dots;i++){
+      const s = 4 + Math.random()*4;
+      L.marker(jitter(z.center, 0.009), {
+        interactive:false,
+        icon: L.divIcon({className:"plant-dot", iconSize:[s,s]})
+      }).addTo(heroMap);
+    }
+  });
+})();
+
+/* ============ legend ============ */
+document.getElementById("legend-list").innerHTML = Object.values(TREE_TYPES).map(t =>
+  `<li><i>${t.symbol}</i> <span>${t.label} <small>${t.latin}</small></span></li>`).join("");
+
+/* ============ Leaflet map of Pula ============ */
+const map = L.map("map", {scrollWheelZoom:false}).setView([44.892, 13.853], 14);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18,
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
+
+function zonePct(z){ return Math.min(1, sum(z.planted)/z.goal); }
+
+function treeSymbols(z, perSymbol=5){
+  /* one symbol per `perSymbol` trees, grouped by type, so the zone visibly "fills in" */
+  return Object.entries(z.planted).map(([k,n])=>{
+    const t = TREE_TYPES[k]; if(!n) return "";
+    const count = Math.max(1, Math.round(n/perSymbol));
+    return `<span title="${t.label}: ${n}">${t.symbol.repeat(count)}</span>`;
+  }).join("");
+}
+
+ZONES.forEach(z => {
+  const pct = zonePct(z);
+  const poly = L.polygon(z.polygon, {
+    color:"#1e5c33", weight:2.5,
+    fillColor:"#2e8b4f",
+    fillOpacity: 0.12 + 0.63*pct      /* zone fills in as planting progresses */
+  }).addTo(map);
+  const rows = Object.entries(z.planted)
+    .filter(([,n])=>n>0)
+    .map(([k,n])=>`${TREE_TYPES[k].symbol} ${TREE_TYPES[k].label}: <b>${n}</b>`)
+    .join("<br>");
+  poly.bindPopup(
+    `<div class="popup-title">${z.name}</div>
+     <div class="popup-trees">${rows || "Sadnja još nije počela."}</div>
+     <div class="popup-pct">${sum(z.planted)} / ${z.goal} stabala (${Math.round(pct*100)} %)</div>`
+  );
+  poly.bindTooltip(`${z.name} — ${Math.round(pct*100)} %`, {sticky:true});
+});
+
+/* ============ zone cards ============ */
+document.getElementById("zone-cards").innerHTML = ZONES.map(z=>{
+  const pct = Math.round(zonePct(z)*100);
+  return `<article class="zone-card">
+    <h3>${z.name}</h3>
+    <p class="desc">${z.desc}</p>
+    <div class="progress"><b style="width:${pct}%"></b></div>
+    <div class="nums"><span>${sum(z.planted)} / ${z.goal} stabala</span><span class="pct">${pct} %</span></div>
+    <div class="tree-grid">${treeSymbols(z) || '<span style="letter-spacing:0;font-size:13px;color:var(--muted)">Sadnja još nije počela — pridružite se prvoj akciji.</span>'}</div>
+  </article>`;
+}).join("");
+
+/* ============ donation tiers ============ */
+const tiersEl = document.getElementById("tiers");
+tiersEl.innerHTML = DONATION_TIERS.map((t,i)=>
+  `<button class="tier${i===0?" active":""}" data-amount="${t.amount}">
+     <b>${t.amount} €</b><span class="t-label">${t.label}</span><p>${t.desc}</p>
+   </button>`).join("");
+tiersEl.addEventListener("click", e=>{
+  const btn = e.target.closest(".tier"); if(!btn) return;
+  tiersEl.querySelectorAll(".tier").forEach(x=>x.classList.remove("active"));
+  btn.classList.add("active");
+  document.getElementById("bank-amount").textContent =
+    Number(btn.dataset.amount).toLocaleString("hr-HR",{minimumFractionDigits:2}) + " €";
+});
+document.getElementById("bank-holder").textContent = BANK.holder;
+document.getElementById("bank-iban").textContent = BANK.iban;
+document.getElementById("bank-desc").textContent = BANK.desc;
+document.querySelector('[data-copy="iban"]').addEventListener("click", async e=>{
+  try{
+    await navigator.clipboard.writeText(BANK.iban.replace(/\s/g,""));
+    e.target.textContent = "Kopirano ✓";
+    setTimeout(()=>e.target.textContent="Kopiraj", 1800);
+  }catch(_){ /* clipboard blocked — text stays selectable */ }
+});
+
+/* ============ legal docs ============ */
+const STATUS_LABEL = { "dobiveno":"Dobiveno", "predano":"Predano", "u-tijeku":"U tijeku" };
+document.getElementById("legal-list").innerHTML = LEGAL_DOCS.map(d=>
+  `<div class="doc">
+     <time datetime="${d.date}">${new Date(d.date).toLocaleDateString("hr-HR")}</time>
+     <div><h3>${d.title}</h3><p>${d.desc}</p></div>
+     <div class="actions">
+       <span class="badge ${d.status}">${STATUS_LABEL[d.status]||d.status}</span>
+       <a class="dl" href="${d.file}" target="_blank" rel="noopener">PDF ↗</a>
+     </div>
+   </div>`).join("");
+</script>
+</body>
+</html>
