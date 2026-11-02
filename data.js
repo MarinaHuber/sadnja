@@ -61,7 +61,7 @@ const DONATION_TIERS = [
 ];
 
 const BANK = {
-  holder: "Udruga Protiv sječe — Pula",
+  holder: "Građanska inicijativa Protiv sječe — Pula",
   iban: "HR12 2340 0091 0000 0000 0",   // TODO: upišite pravi IBAN
   model: "HR00",
   desc: "Donacija za sadnju — Pula"
