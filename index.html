@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Protiv sječe — Pula</title>
+<title>Posadi stablo! — Pula</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
@@ -133,17 +133,19 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 
 /* ---------- legal ---------- */
 .legal-list{display:grid; gap:0; border:1px solid var(--line); background:var(--card); margin-top:30px}
-.doc{display:grid; grid-template-columns:110px 1fr auto; gap:18px; padding:20px 22px; border-bottom:1px solid var(--line); align-items:start}
+.doc{display:grid; grid-template-columns:1fr auto; gap:18px; padding:20px 22px; border-bottom:1px solid var(--line); align-items:start}
 .doc:last-child{border-bottom:0}
 .doc time{font-size:13px; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; padding-top:3px}
 .doc h3{font-size:18px; font-family:var(--body); font-weight:700; margin-bottom:4px}
 .doc p{margin:0; font-size:14.5px; color:var(--muted); max-width:70ch}
 .doc .actions{display:flex; flex-direction:column; gap:8px; align-items:flex-end}
 .badge{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border:1.5px solid}
-.badge.dobiveno{color:var(--green); border-color:var(--green)}
-.badge.predano{color:#8a6d1a; border-color:#c7a62e}
-.badge.u-tijeku{color:var(--red); border-color:var(--red)}
+.badge.aktivno{color:var(--green); border-color:var(--green)}
+.badge.u-pripremi{color:#8a6d1a; border-color:#c7a62e}
+.badge.otvoreno{color:var(--red); border-color:var(--red)}
 .doc a.dl{font-size:13px; font-weight:600}
+.doc .tag-col{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding-top:4px}
+.zone-tag{align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); border:1.5px solid var(--green); padding:3px 9px}
 
 /* ---------- footer ---------- */
 footer{background:var(--ink); color:#9aa095; padding-block:40px; font-size:14px}
@@ -171,11 +173,11 @@ footer a{color:var(--green-bright)}
 
 <header class="bar">
   <div class="wrap">
-    <a class="logo" href="#top"><img src="images/ps-logo.jpg" alt="PS! logo">Protiv <span>sječe</span> · Pula</a>
+    <a class="logo" href="#top"><img src="images/ps-logo.jpg" alt="PS! logo">Posadi <span>stablo!</span> · Pula</a>
     <nav>
-      <a href="#karta">Karta sadnje</a>
+      <a href="#karta">Projekti</a>
       <a href="#donacije" class="donate-link">Doniraj</a>
-      <a href="#dokumenti">Pravna bitka</a>
+      <a href="#suradnja">Suradnja</a>
     </nav>
   </div>
 </header>
@@ -189,7 +191,7 @@ footer a{color:var(--green-bright)}
     <div>
       <p class="eyebrow">Građanska inicijativa · Pula, Istra</p>
       <h1>Gdje su <span class="strike">rušili</span>,<br>mi <em>sadimo</em>.</h1>
-      <p>Vraćamo zelenilo na posječene i zapuštene prostore sjeverne Pule — Veli Vrh i Padulj. Svaka donirana sadnica završi u zemlji, a svako posađeno stablo vidite na karti ispod. Zemljište branimo i na terenu i na sudu.</p>
+      <p>Vraćamo zelenilo na posječene i zapuštene prostore Pule — od Velog Vrha i Pragrande do Valdebeka. Permakulturom, sadnjom autohtonih vrsta i edukacijama, u suradnji s partnerima poput Permakulture Hrvatske. Svako posađeno stablo vidite na karti ispod.</p>
       <div class="hero-ctas">
         <a class="btn primary" href="#donacije">Doniraj sadnicu</a>
         <a class="btn ghost" href="#karta">Pogledaj kartu</a>
@@ -203,8 +205,8 @@ footer a{color:var(--green-bright)}
 <section id="karta">
   <div class="wrap">
     <p class="eyebrow">Živa karta</p>
-    <h2 class="section-title">Karta sadnje — Pula</h2>
-    <p class="lede">Zone se na karti pune zelenom bojom kako sadnja napreduje. Kliknite zonu za broj stabala po vrsti. Podaci se ažuriraju nakon svake akcije — jedno stablo, jedan simbol.</p>
+    <h2 class="section-title">Portfelj projekata — Pula</h2>
+    <p class="lede">Od pošumljavanja Velog Vrha do permakulturnih polja na Valdebeku i edukativnog vrta uz mandrač — svaki projekt je zona na karti. Zone se pune zelenom bojom kako sadnja napreduje; kliknite zonu za detalje. Jedno stablo, jedan simbol.</p>
     <div class="map-grid" style="margin-top:30px">
       <div id="map"></div>
       <aside class="legend">
@@ -234,19 +236,19 @@ footer a{color:var(--green-bright)}
   </div>
 </section>
 
-<!-- ============ LEGAL ============ -->
-<section id="dokumenti">
+<!-- ============ COLLABORATION ============ -->
+<section id="suradnja">
   <div class="wrap">
-    <p class="eyebrow">Pravna bitka</p>
-    <h2 class="section-title">Dokumenti o zemljištu</h2>
-    <p class="lede">Teritorij za koji se borimo javno je dobro. Ovdje objavljujemo sve: katastarske izvode, primjedbe u javnim raspravama, tužbe i rješenja — da svaki građanin može provjeriti na čemu smo.</p>
-    <div class="legal-list" id="legal-list"></div>
+    <p class="eyebrow">Zajedno za zeleno</p>
+    <h2 class="section-title">Suradnja i edukacija</h2>
+    <p class="lede">Ne radimo sami. Povezujemo se s organizacijama koje sade autohtono bilje i obnavljaju šume, a kroz radionice i tečajeve permakulture prenosimo znanje građanima Pule — od školskih vrtova do dizajna cijelih parcela.</p>
+    <div class="legal-list" id="partner-list"></div>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <div>© 2026 Građanska inicijativa Protiv sječe — Pula · <a href="#dokumenti">Transparentnost</a></div>
+    <div>© 2026 Građanska inicijativa Protiv sječe — Pula · <a href="#suradnja">Suradnja</a></div>
     <div>Pridružite se sljedećoj sadnji: <strong>svake subote u 9 h</strong>, okretište Veli Vrh.</div>
   </div>
 </footer>
@@ -290,8 +292,14 @@ HERO_STATS.forEach((s,i)=> countUp(document.getElementById(`hstat-${i}`), s.valu
     icon: L.divIcon({className:"reticle-icon", iconSize:[96,96]})
   }).addTo(heroMap);
 
-  /* one green dot per ~10 planted trees, scattered inside each zone */
+  /* one dot per project site, plus one per ~10 planted trees scattered inside */
   function jitter(c, r){ return [c[0] + (Math.random()-0.5)*r, c[1] + (Math.random()-0.5)*r*1.4]; }
+  ZONES.forEach(z => {
+    L.marker(z.center, {
+      interactive:false,
+      icon: L.divIcon({className:"plant-dot", iconSize:[9,9]})
+    }).addTo(heroMap);
+  });
   ZONES.forEach(z => {
     const dots = Math.round(sum(z.planted)/10);   /* none planted yet → no dots */
     for(let i=0;i<dots;i++){
@@ -309,7 +317,7 @@ document.getElementById("legend-list").innerHTML = Object.values(TREE_TYPES).map
   `<li><i>${t.symbol}</i> <span>${t.label} <small>${t.latin}</small></span></li>`).join("");
 
 /* ============ Leaflet map of Pula ============ */
-const map = L.map("map", {scrollWheelZoom:false}).setView([44.892, 13.853], 14);
+const map = L.map("map", {scrollWheelZoom:false}).setView([44.872, 13.851], 13);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -350,6 +358,7 @@ document.getElementById("zone-cards").innerHTML = ZONES.map(z=>{
   const pct = Math.round(zonePct(z)*100);
   return `<article class="zone-card">
     <h3>${z.name}</h3>
+    ${z.tag ? `<span class="zone-tag">${z.tag}</span>` : ""}
     <p class="desc">${z.desc}</p>
     <div class="progress"><b style="width:${pct}%"></b></div>
     <div class="nums"><span>${sum(z.planted)} / ${z.goal} stabala</span><span class="pct">${pct} %</span></div>
@@ -381,15 +390,14 @@ document.querySelector('[data-copy="iban"]').addEventListener("click", async e=>
   }catch(_){ /* clipboard blocked — text stays selectable */ }
 });
 
-/* ============ legal docs ============ */
-const STATUS_LABEL = { "dobiveno":"Dobiveno", "predano":"Predano", "u-tijeku":"U tijeku" };
-document.getElementById("legal-list").innerHTML = LEGAL_DOCS.map(d=>
+/* ============ partners & education ============ */
+const STATUS_LABEL = { "aktivno":"Aktivno", "u-pripremi":"U pripremi", "otvoreno":"Otvoreno" };
+document.getElementById("partner-list").innerHTML = PARTNERS.map(p=>
   `<div class="doc">
-     <time datetime="${d.date}">${new Date(d.date).toLocaleDateString("hr-HR")}</time>
-     <div><h3>${d.title}</h3><p>${d.desc}</p></div>
+     <div><h3>${p.name}</h3><p>${p.desc}</p></div>
      <div class="actions">
-       <span class="badge ${d.status}">${STATUS_LABEL[d.status]||d.status}</span>
-       <a class="dl" href="${d.file}" target="_blank" rel="noopener">PDF ↗</a>
+       <span class="badge ${p.status}">${STATUS_LABEL[p.status]||p.status}</span>
+       ${p.url ? `<a class="dl" href="${p.url}" target="_blank" rel="noopener">Posjeti ↗</a>` : ""}
      </div>
    </div>`).join("");
 </script>
