@@ -124,6 +124,34 @@ const BANK = {
 
 /* Suradnja i edukacija — partneri koji sade autohtono bilje i obnavljaju šume.
    status: "aktivno" | "u-pripremi" | "otvoreno" */
+/* Pravni dokumenti i postignuća — status: "dobiveno" | "predano" | "u-tijeku" */
+const LEGAL_DOCS = [
+  {
+    title: "Peticija građana za zaštitu Pragrande — 1.550 potpisa",
+    date: "2026-07-30", status: "predano",
+    desc: "Naše najveće postignuće dosad: 1.550 građana potpisalo je zahtjev za zaštitu Pragrande, predan Gradskom vijeću Pule na sjednici Vijeća.",
+    file: "docs/peticija-pragrande.pdf"
+  },
+  {
+    title: "Elaborat o gradskim česticama — poslan Gradu Puli",
+    date: "2026-06-19", status: "u-tijeku",
+    desc: "Detaljan elaborat o gradskim česticama pogodnima za sadnju i zaštitu, poslan Gradu Puli. Na odgovor čekamo već 4 mjeseca.",
+    file: "docs/elaborat-gradske-cestice.pdf"
+  },
+  {
+    title: "Zahtjev za uvid u katastarske čestice — Veli Vrh",
+    date: "2026-03-14", status: "dobiveno",
+    desc: "Izvodi iz katastra i zemljišnih knjiga za k.č. na Velom Vrhu; dokazuju da je zemljište javno dobro.",
+    file: "docs/katastar-veli-vrh.pdf"
+  },
+  {
+    title: "Rješenje o pravu na pristup informacijama",
+    date: "2026-09-08", status: "dobiveno",
+    desc: "Povjerenik za informiranje naložio Gradu da objavi ugovore o raspolaganju gradskim zemljištem.",
+    file: "docs/rjesenje-ppi.pdf"
+  }
+];
+
 const PARTNERS = [
   {
     name: "Permakultura Hrvatska (PerForum)",

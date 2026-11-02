@@ -37,6 +37,7 @@ section{padding-block:72px}
   color:var(--red); margin-bottom:10px;
 }
 .section-title{font-size:clamp(34px,5vw,54px); text-transform:uppercase; line-height:1.05; margin-bottom:18px}
+.sub-title{font-size:clamp(24px,3.5vw,34px); text-transform:uppercase; line-height:1.05; margin:56px 0 14px}
 .lede{max-width:62ch; color:var(--muted); font-size:18px}
 
 /* ---------- top bar ---------- */
@@ -140,9 +141,10 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .doc p{margin:0; font-size:14.5px; color:var(--muted); max-width:70ch}
 .doc .actions{display:flex; flex-direction:column; gap:8px; align-items:flex-end}
 .badge{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border:1.5px solid}
-.badge.aktivno{color:var(--green); border-color:var(--green)}
-.badge.u-pripremi{color:#8a6d1a; border-color:#c7a62e}
-.badge.otvoreno{color:var(--red); border-color:var(--red)}
+.badge.aktivno, .badge.dobiveno{color:var(--green); border-color:var(--green)}
+.badge.u-pripremi, .badge.predano{color:#8a6d1a; border-color:#c7a62e}
+.badge.otvoreno, .badge.u-tijeku{color:var(--red); border-color:var(--red)}
+.doc time{display:block; font-size:13px; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; margin-bottom:2px}
 .doc a.dl{font-size:13px; font-weight:600}
 .doc .tag-col{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding-top:4px}
 .zone-tag{align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--green); border:1.5px solid var(--green); padding:3px 9px}
@@ -240,9 +242,12 @@ footer a{color:var(--green-bright)}
 <section id="suradnja">
   <div class="wrap">
     <p class="eyebrow">Zajedno za zeleno</p>
-    <h2 class="section-title">Suradnja i edukacija</h2>
-    <p class="lede">Ne radimo sami. Povezujemo se s organizacijama koje sade autohtono bilje i obnavljaju šume, a kroz radionice i tečajeve permakulture prenosimo znanje građanima Pule — od školskih vrtova do dizajna cijelih parcela.</p>
+    <h2 class="section-title">Elaborati i suradnje</h2>
+    <p class="lede">Ne radimo sami. Povezujemo se s organizacijama koje sade autohtono bilje i obnavljaju šume, a kroz radionice i tečajeve permakulture prenosimo znanje građanima Pule.</p>
     <div class="legal-list" id="partner-list"></div>
+    <h3 class="sub-title">Postignuća i dokumenti</h3>
+    <p class="lede">Zemljište branimo i papirima. Ovdje objavljujemo peticije, elaborate i rješenja — da svaki građanin može provjeriti na čemu smo i koliko dugo institucije šute.</p>
+    <div class="legal-list" id="legal-list"></div>
   </div>
 </section>
 
@@ -391,13 +396,27 @@ document.querySelector('[data-copy="iban"]').addEventListener("click", async e=>
 });
 
 /* ============ partners & education ============ */
-const STATUS_LABEL = { "aktivno":"Aktivno", "u-pripremi":"U pripremi", "otvoreno":"Otvoreno" };
+const STATUS_LABEL = { "aktivno":"Aktivno", "u-pripremi":"U pripremi", "otvoreno":"Otvoreno",
+                       "dobiveno":"Dobiveno", "predano":"Predano", "u-tijeku":"U tijeku" };
 document.getElementById("partner-list").innerHTML = PARTNERS.map(p=>
   `<div class="doc">
      <div><h3>${p.name}</h3><p>${p.desc}</p></div>
      <div class="actions">
        <span class="badge ${p.status}">${STATUS_LABEL[p.status]||p.status}</span>
        ${p.url ? `<a class="dl" href="${p.url}" target="_blank" rel="noopener">Posjeti ↗</a>` : ""}
+     </div>
+   </div>`).join("");
+
+/* ============ legal docs & accomplishments ============ */
+document.getElementById("legal-list").innerHTML = LEGAL_DOCS.map(d=>
+  `<div class="doc">
+     <div>
+       <time datetime="${d.date}">${new Date(d.date).toLocaleDateString("hr-HR")}</time>
+       <h3>${d.title}</h3><p>${d.desc}</p>
+     </div>
+     <div class="actions">
+       <span class="badge ${d.status}">${STATUS_LABEL[d.status]||d.status}</span>
+       <a class="dl" href="${d.file}" target="_blank" rel="noopener">PDF ↗</a>
      </div>
    </div>`).join("");
 </script>
