@@ -108,7 +108,7 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .map-note{font-size:13px; color:#9fd0ab; margin-top:10px}
 
 .zone-cards{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:18px; margin-top:34px}
-.zone-card{background:#174727; color:#cfe0cc; border-top:3px solid #ffd23f; padding:18px 18px 16px; display:flex; flex-direction:column; gap:10px}
+.zone-card{background:#174727; color:#cfe0cc; border-top:3px solid #3ce07a; padding:18px 18px 16px; display:flex; flex-direction:column; gap:10px}
 .zone-card h3{font-size:22px; text-transform:uppercase; color:#fff}
 .zone-card .desc{font-size:14px; color:#cfe0cc; opacity:.85; min-height:0}
 .progress{height:10px; background:rgba(255,255,255,.18); position:relative; overflow:hidden}
@@ -120,26 +120,26 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 
 /* ---------- donation ---------- */
 .donate{background:var(--green); color:#f2f6ef}
-.donate .eyebrow{color:#ffd23f}
+.donate .eyebrow{color:#3ce07a}
 .donate .lede{color:#cfe0cc}
 .tiers{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin:34px 0 10px}
-.tier{background:#174727; color:#f2f6ef; border:2px solid #2e8b4f; padding:20px; cursor:pointer; transition:transform .12s ease, background .12s ease}
-.tier:hover{background:#1d5a32; transform:translateY(-3px)}
-.tier.active{background:var(--paper); color:var(--ink); border-color:var(--ink)}
+.tier{background:var(--card); color:var(--ink); border:2px solid var(--line); padding:20px; cursor:pointer; transition:transform .12s ease, background .12s ease}
+.tier:hover{background:#f3f0e7; transform:translateY(-3px)}
+.tier.active{background:var(--green); color:#f2f6ef; border-color:var(--green)}
 .tier b{display:block; font-family:var(--display); font-size:34px; font-weight:400}
 .tier .t-label{font-weight:700; text-transform:uppercase; font-size:13px; letter-spacing:.08em; margin-top:4px}
 .tier p{font-size:13.5px; margin:8px 0 0; opacity:.85}
-.pay-box{background:#174727; border:1px dashed #4caf6f; padding:22px; margin-top:22px; display:grid; gap:10px}
+.pay-box{background:var(--card); border:1px dashed var(--green); padding:22px; margin-top:22px; display:grid; gap:10px}
 .pay-box .row{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
-.pay-box label{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:#9fd0ab; min-width:90px}
-.pay-box code{font-size:17px; background:transparent; color:#fff; letter-spacing:.04em}
-.copy-btn{background:transparent; border:1px solid #4caf6f; color:#cfe0cc; font-size:12px; padding:4px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em}
-.copy-btn:hover{background:#2e8b4f; color:var(--ink)}
+.pay-box label{font-size:12px; letter-spacing:.1em; text-transform:uppercase; color:var(--green); min-width:90px}
+.pay-box code{font-size:17px; background:transparent; color:var(--ink); letter-spacing:.04em}
+.copy-btn{background:transparent; border:1px solid var(--green); color:var(--green); font-size:12px; padding:4px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em}
+.copy-btn:hover{background:var(--green); color:#fff}
 .monthly-note{font-size:14px; color:var(--muted); margin-top:16px; max-width:70ch}
 .donate .sub-title{color:#f2f6ef}
 .how-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:26px}
-.how-card{background:#174727; border-top:3px solid #ffd23f; padding:18px; font-size:14px; line-height:1.55; color:#cfe0cc}
-.how-card b{display:block; color:#fff; font-size:15px; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em}
+.how-card{background:var(--card); border:1px solid var(--line); border-top:3px solid var(--green); padding:18px; font-size:14px; line-height:1.55; color:var(--muted)}
+.how-card b{display:block; color:var(--ink); font-size:15px; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em}
 
 /* ---------- legal ---------- */
 .legal-list{display:grid; gap:0; border:1px solid var(--line); background:var(--card); margin-top:30px}
@@ -156,7 +156,7 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .doc time{display:block; font-size:13px; font-weight:600; color:var(--muted); font-variant-numeric:tabular-nums; margin-bottom:2px}
 .doc a.dl{font-size:13px; font-weight:600}
 .doc .tag-col{font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); padding-top:4px}
-.zone-tag{align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#ffd23f; border:1.5px solid #ffd23f; padding:3px 9px}
+.zone-tag{align-self:flex-start; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#3ce07a; border:1.5px solid #3ce07a; padding:3px 9px}
 
 /* ---------- footer ---------- */
 footer{background:var(--ink); color:#9aa095; padding-block:40px; font-size:14px}
@@ -248,7 +248,7 @@ footer a{color:var(--green-bright)}
 <!-- ============ MAP ============ -->
 <section class="donate" id="karta">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="map_eyebrow">Živa karta</p>
+    <p class="eyebrow" data-i18n="map_eyebrow">Zone u planu</p>
     <h2 class="section-title" data-i18n="map_title">Portfelj projekata, Pula</h2>
     <p class="lede" data-i18n="map_lede">Od pošumljavanja Velog Vrha do permakulturnih polja na Valdebeku i edukativnog vrta uz mandrač, svaki projekt je zona na karti. Zone se pune zelenom bojom kako sadnja napreduje; kliknite zonu za detalje. Jedno stablo, jedan simbol.</p>
     <div class="map-grid" style="margin-top:30px">
@@ -471,7 +471,7 @@ const UI = {
           en:"We are bringing green back to Pula's clear-cut and neglected spaces, from Veli Vrh and Pragrande to Valdebek. Through permaculture, native-species planting and education, together with partners like Permaculture Croatia. Every planted tree appears on the map below."},
   cta_donate:{hr:"Doniraj sadnicu", en:"Donate a sapling"},
   cta_map:{hr:"Pogledaj kartu", en:"View the map"},
-  map_eyebrow:{hr:"Živa karta", en:"Living map"},
+  map_eyebrow:{hr:"Zone u planu", en:"Planned zones"},
   map_title:{hr:"Portfelj projekata, Pula", en:"Project portfolio, Pula"},
   map_lede:{hr:"Od pošumljavanja Velog Vrha do permakulturnih polja na Valdebeku i edukativnog vrta uz mandrač, svaki projekt je zona na karti. Zone se pune zelenom bojom kako sadnja napreduje; kliknite zonu za detalje. Jedno stablo, jedan simbol.",
             en:"From reforesting Veli Vrh to permaculture fields in Valdebek and the educational garden by the harbour, every project is a zone on the map. Zones fill with green as planting progresses; click a zone for details. One tree, one symbol."},
