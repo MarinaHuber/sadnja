@@ -129,7 +129,7 @@ const LEGAL_DOCS = [
   {
     title: "Peticija građana za zaštitu Pragrande — 1.550 potpisa",
     date: "2026-07-30", status: "predano",
-    desc: "Naše najveće postignuće dosad: 1.550 građana potpisalo je zahtjev za zaštitu Pragrande, predan Gradskom vijeću Pule na sjednici Vijeća.",
+    desc: "1.550 građana potpisalo je zahtjev za zaštitu Pragrande, predan Gradskom vijeću Pule na sjednici Vijeća.",
     file: "docs/peticija-pragrande.pdf"
   },
   {
@@ -143,6 +143,12 @@ const LEGAL_DOCS = [
     date: "2026-03-14", status: "dobiveno",
     desc: "Izvodi iz katastra i zemljišnih knjiga za k.č. na Velom Vrhu; dokazuju da je zemljište javno dobro.",
     file: "docs/katastar-veli-vrh.pdf"
+  },
+  {
+    title: "Upravna tužba — ukidanje lokacijske dozvole",
+    date: "2026-06-19", status: "u-tijeku",
+    desc: "Tužba Upravnom sudu u Rijeci protiv lokacijske dozvole izdane bez studije utjecaja na okoliš.",
+    file: "docs/tuzba-lokacijska.pdf"
   },
   {
     title: "Rješenje o pravu na pristup informacijama",
