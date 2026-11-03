@@ -20,7 +20,7 @@ const TREE_TYPES = {
 const HERO_STATS = [
   { value: 1240, label: "stabala posječeno od 2024.",     label_en: "trees cut down since 2024" },
   { value: 1550, label: "potpisa za zaštitu Pragrande",   label_en: "signatures to protect Pragrande" },
-  { value: 5,    label: "permakulturnih lokacija",        label_en: "permaculture sites" }
+  { value: 4,    label: "permakulturnih lokacija",        label_en: "permaculture sites" }
 ];
 
 const ZONES = [
@@ -64,20 +64,6 @@ const ZONES = [
     polygon: [
       [44.8715, 13.8415], [44.8712, 13.8468], [44.8682, 13.8472],
       [44.8672, 13.8428], [44.8695, 13.8405]
-    ]
-  },
-  {
-    id: "citymall",
-    name: "City Mall",
-    tag: "urbano zelenilo", tag_en: "urban greenery",
-    desc: "Zeleni pojas uz trgovački centar: rub parkirališta pretvaramo u sjenu i zelenilo.",
-    desc_en: "A small strip by the shopping centre, turning the parking lot's edge into shade and greenery.",
-    goal: 80,
-    planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
-    center: [44.8715, 13.8600],
-    polygon: [
-      [44.8730, 13.8580], [44.8728, 13.8622], [44.8702, 13.8625],
-      [44.8698, 13.8585], [44.8714, 13.8570]
     ]
   },
   {
