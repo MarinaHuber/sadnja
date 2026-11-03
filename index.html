@@ -123,7 +123,7 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .donate .eyebrow{color:#ffd23f}
 .donate .lede{color:#cfe0cc}
 .tiers{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; margin:34px 0 10px}
-.tier{background:#174727; border:2px solid #2e8b4f; padding:20px; cursor:pointer; transition:transform .12s ease, background .12s ease}
+.tier{background:#174727; color:#f2f6ef; border:2px solid #2e8b4f; padding:20px; cursor:pointer; transition:transform .12s ease, background .12s ease}
 .tier:hover{background:#1d5a32; transform:translateY(-3px)}
 .tier.active{background:var(--paper); color:var(--ink); border-color:var(--paper)}
 .tier b{display:block; font-family:var(--display); font-size:34px; font-weight:400}
@@ -135,7 +135,7 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .pay-box code{font-size:17px; background:transparent; color:#fff; letter-spacing:.04em}
 .copy-btn{background:transparent; border:1px solid #4caf6f; color:#cfe0cc; font-size:12px; padding:4px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em}
 .copy-btn:hover{background:#2e8b4f; color:var(--ink)}
-.monthly-note{font-size:14px; color:#cfe0cc; margin-top:16px; max-width:70ch}
+.monthly-note{font-size:14px; color:var(--muted); margin-top:16px; max-width:70ch}
 .donate .sub-title{color:#f2f6ef}
 .how-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:26px}
 .how-card{background:#174727; border-top:3px solid #ffd23f; padding:18px; font-size:14px; line-height:1.55; color:#cfe0cc}
@@ -217,7 +217,7 @@ footer a{color:var(--green-bright)}
 </section>
 
 <!-- ============ DONATE ============ -->
-<section class="donate" id="donacije">
+<section id="donacije">
   <div class="wrap">
     <p class="eyebrow" data-i18n="don_eyebrow">Donacije</p>
     <h2 class="section-title" data-i18n="don_title">Jedna sadnica: 6 €</h2>
@@ -246,7 +246,7 @@ footer a{color:var(--green-bright)}
 </section>
 
 <!-- ============ MAP ============ -->
-<section id="karta">
+<section class="donate" id="karta">
   <div class="wrap">
     <p class="eyebrow" data-i18n="map_eyebrow">Živa karta</p>
     <h2 class="section-title" data-i18n="map_title">Portfelj projekata, Pula</h2>
