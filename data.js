@@ -71,14 +71,14 @@ const ZONES = [
     name: "Veruda, pokusna parcela",
     name_en: "Veruda test plot",
     tag: "pokusna sadnja", tag_en: "pilot planting",
-    desc: "Parcela uz Valsaline na Verudi (k.č. 286/24, k.o. Pula): naša prva pokusna Miyawaki šumica, za koju je projekt dobio sponzorstvo.",
-    desc_en: "A plot by Valsaline street in Veruda (cadastral parcel 286/24, c.m. Pula): our first trial Miyawaki grove, for which the project received sponsorship.",
+    desc: "Parcela uz Valsaline na Verudi (k.č. 5160/25, k.o. Pula): naša prva pokusna Miyawaki šumica, za koju je projekt dobio sponzorstvo.",
+    desc_en: "A plot by Valsaline street in Veruda (cadastral parcel 5160/25, c.m. Pula): our first trial Miyawaki grove, for which the project received sponsorship.",
     goal: 120,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
-    center: [44.8588, 13.8443],
+    center: [44.8555, 13.8360],
     polygon: [
-      [44.8596, 13.8436], [44.8594, 13.8452], [44.8585, 13.8456],
-      [44.8580, 13.8444], [44.8587, 13.8432]
+      [44.8559, 13.8358], [44.8557, 13.8364], [44.8552, 13.8365],
+      [44.8549, 13.8359], [44.8552, 13.8353], [44.8557, 13.8354]
     ]
   }
 ];
