@@ -20,7 +20,7 @@ const TREE_TYPES = {
 const HERO_STATS = [
   { value: 1240, label: "stabala posječeno od 2024.",     label_en: "trees cut down since 2024" },
   { value: 1550, label: "potpisa za zaštitu Pragrande",   label_en: "signatures to protect Pragrande" },
-  { value: 6,    label: "permakulturnih lokacija",        label_en: "permaculture sites" }
+  { value: 5,    label: "permakulturnih lokacija",        label_en: "permaculture sites" }
 ];
 
 const ZONES = [
@@ -68,8 +68,7 @@ const ZONES = [
   },
   {
     id: "citymall",
-    name: "Šijana, kod City Malla",
-    name_en: "Šijana, by City Mall",
+    name: "City Mall",
     tag: "urbano zelenilo", tag_en: "urban greenery",
     desc: "Zeleni pojas uz trgovački centar: rub parkirališta pretvaramo u sjenu i zelenilo.",
     desc_en: "A small strip by the shopping centre, turning the parking lot's edge into shade and greenery.",
@@ -82,32 +81,18 @@ const ZONES = [
     ]
   },
   {
-    id: "valdebek",
-    name: "Valdebek",
-    tag: "permakultura", tag_en: "permaculture",
-    desc: "Rubni dio grada s plodnim parcelama: ogledna permakulturna polja i voćnjak.",
-    desc_en: "The city's edge with fertile plots, demonstration permaculture fields and an orchard.",
-    goal: 200,
+    id: "veruda",
+    name: "Veruda, pokusna parcela",
+    name_en: "Veruda test plot",
+    tag: "pokusna sadnja", tag_en: "pilot planting",
+    desc: "Parcela uz Valsaline na Verudi (k.č. 286/24, k.o. Pula): naša prva pokusna Miyawaki šumica, za koju je projekt dobio sponzorstvo.",
+    desc_en: "A plot by Valsaline street in Veruda (cadastral parcel 286/24, c.m. Pula): our first trial Miyawaki grove, for which the project received sponsorship.",
+    goal: 120,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
-    center: [44.8525, 13.8695],
+    center: [44.8588, 13.8443],
     polygon: [
-      [44.8545, 13.8665], [44.8542, 13.8725], [44.8508, 13.8730],
-      [44.8500, 13.8675], [44.8522, 13.8650]
-    ]
-  },
-  {
-    id: "marsovo",
-    name: "Marsovo polje, Mandrač",
-    name_en: "Marsovo polje, Mandrač harbour",
-    tag: "edukacija", tag_en: "education",
-    desc: "Prostor uz mandrač: edukativni vrt u kojem s građanima i školama učimo saditi autohtone vrste.",
-    desc_en: "The space by the small harbour, an educational garden where citizens and schools learn to plant native species.",
-    goal: 100,
-    planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
-    center: [44.8660, 13.8370],
-    polygon: [
-      [44.8678, 13.8348], [44.8675, 13.8395], [44.8648, 13.8398],
-      [44.8642, 13.8352], [44.8660, 13.8335]
+      [44.8596, 13.8436], [44.8594, 13.8452], [44.8585, 13.8456],
+      [44.8580, 13.8444], [44.8587, 13.8432]
     ]
   }
 ];
@@ -116,20 +101,20 @@ const ZONES = [
 const DONATION_TIERS = [
   { amount: 6,   label: "1 sadnica",  label_en: "1 sapling",
     desc: "jedna autohtona sadnica s kolcem i zaštitom",
-    desc_en: "one native sapling + stake and protection" },
+    desc_en: "one native sapling with stake and protection" },
   { amount: 30,  label: "5 sadnica",  label_en: "5 saplings",
     desc: "niz stabala uz stazu na Velom Vrhu",
     desc_en: "a row of trees along the Veli Vrh path" },
   { amount: 72,  label: "12 sadnica", label_en: "12 saplings",
     desc: "mali šumarak sa zalijevanjem prve godine",
-    desc_en: "a micro-grove with first-year irrigation" },
+    desc_en: "a small grove with first-year watering" },
   { amount: 150, label: "25 sadnica", label_en: "25 saplings",
     desc: "obnova jedne posječene parcele",
     desc_en: "restoring one clear-cut plot" }
 ];
 
 const BANK = {
-  holder: "Građanska inicijativa Posadi stablo!, Pula",
+  holder: "Građanska inicijativa Posadi stablo! Pula",
   iban: "HR12 2340 0091 0000 0000 0",   // TODO: upišite pravi IBAN
   model: "HR00",
   desc: "Donacija za sadnju, Pula",

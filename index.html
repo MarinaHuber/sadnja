@@ -206,7 +206,7 @@ footer a{color:var(--green-bright)}
     <div>
       <p class="eyebrow" data-i18n="hero_eyebrow">Građanska inicijativa · Pula, Istra</p>
       <h1 data-i18n="hero_title">Gdje su <span class="strike">rušili</span>,<br>mi <em>sadimo</em>.</h1>
-      <p data-i18n="hero_p">Vraćamo zelenilo na posječene i zapuštene površine Pule, od Velog Vrha i Pragrande do Valdebeka. Sadimo autohtone vrste po načelima permakulture i educiramo građane, u suradnji s partnerima poput Permakulture Hrvatske. Sve zone sadnje pratite na karti u nastavku.</p>
+      <p data-i18n="hero_p">Vraćamo zelenilo na posječene i zapuštene površine Pule, od Velog Vrha i Pragrande do Verude. Sadimo autohtone vrste po načelima permakulture i educiramo građane, u suradnji s partnerima poput Permakulture Hrvatske. Sve zone sadnje pratite na karti u nastavku.</p>
       <div class="hero-ctas">
         <a class="btn primary" href="#donacije" data-i18n="cta_donate">Doniraj sadnicu</a>
         <a class="btn ghost" href="#karta" data-i18n="cta_map">Pogledaj kartu</a>
@@ -249,7 +249,7 @@ footer a{color:var(--green-bright)}
   <div class="wrap">
     <p class="eyebrow" data-i18n="map_eyebrow">Zone u planu</p>
     <h2 class="section-title" data-i18n="map_title">Portfelj projekata, Pula</h2>
-    <p class="lede" data-i18n="map_lede">Od pošumljavanja Velog Vrha do permakulturnih polja na Valdebeku i edukativnog vrta uz mandrač, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.</p>
+    <p class="lede" data-i18n="map_lede">Od pošumljavanja Velog Vrha do pokusne parcele na Verudi, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.</p>
     <div class="map-grid" style="margin-top:30px">
       <div id="map"></div>
       <aside class="legend">
@@ -283,7 +283,7 @@ footer a{color:var(--green-bright)}
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data.js?v=4"></script>
+<script src="data.js?v=5"></script>
 <script>
 /* ============ language (HR default; toggle reloads with saved choice) ============ */
 let lang = "hr";
@@ -356,7 +356,7 @@ document.getElementById("legend-list").innerHTML = Object.values(TREE_TYPES).map
   `<li><i>${t.symbol}</i> <span>${tr(t,"label")} <small>${t.latin}</small></span></li>`).join("");
 
 /* ============ Leaflet map of Pula ============ */
-const map = L.map("map", {scrollWheelZoom:false}).setView([44.872, 13.851], 13);
+const map = L.map("map", {scrollWheelZoom:false}).setView([44.874, 13.846], 13);
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -466,14 +466,14 @@ const UI = {
   hero_eyebrow:{hr:"Građanska inicijativa · Pula, Istra", en:"Citizens' initiative · Pula, Istria"},
   hero_title:{hr:'Gdje su <span class="strike">rušili</span>,<br>mi <em>sadimo</em>.',
               en:'Where they <span class="strike">remove</span>,<br>we <em>plant</em>.'},
-  hero_p:{hr:"Vraćamo zelenilo na posječene i zapuštene površine Pule, od Velog Vrha i Pragrande do Valdebeka. Sadimo autohtone vrste po načelima permakulture i educiramo građane, u suradnji s partnerima poput Permakulture Hrvatske. Sve zone sadnje pratite na karti u nastavku.",
-          en:"We are bringing green back to Pula's clear-cut and neglected spaces, from Veli Vrh and Pragrande to Valdebek. Through permaculture, native-species planting and education, together with partners like Permaculture Croatia. Every planted tree appears on the map below."},
+  hero_p:{hr:"Vraćamo zelenilo na posječene i zapuštene površine Pule, od Velog Vrha i Pragrande do Verude. Sadimo autohtone vrste po načelima permakulture i educiramo građane, u suradnji s partnerima poput Permakulture Hrvatske. Sve zone sadnje pratite na karti u nastavku.",
+          en:"We are bringing green back to Pula's clear-cut and neglected spaces, from Veli Vrh and Pragrande to Veruda. Through permaculture, native-species planting and education, together with partners like Permaculture Croatia. All planting zones are on the map below."},
   cta_donate:{hr:"Doniraj sadnicu", en:"Donate a sapling"},
   cta_map:{hr:"Pogledaj kartu", en:"View the map"},
   map_eyebrow:{hr:"Zone u planu", en:"Planned zones"},
   map_title:{hr:"Portfelj projekata, Pula", en:"Project portfolio, Pula"},
-  map_lede:{hr:"Od pošumljavanja Velog Vrha do permakulturnih polja na Valdebeku i edukativnog vrta uz mandrač, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.",
-            en:"From reforesting Veli Vrh to permaculture fields in Valdebek and the educational garden by the harbour, every project is a zone on the map. Zones fill with green as planting progresses; click a zone for details. One tree, one symbol."},
+  map_lede:{hr:"Od pošumljavanja Velog Vrha do pokusne parcele na Verudi, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.",
+            en:"From reforesting Veli Vrh to the test plot in Veruda, every project is a zone on the map. Zones fill with green as planting progresses; click a zone for details. One tree, one symbol."},
   legend_title:{hr:"Vrste koje sadimo", en:"Species we plant"},
   map_note:{hr:"Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja.",
             en:"Zone borders are approximate, for orientation only. Green intensity = share of the goal reached."},
