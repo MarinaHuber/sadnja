@@ -190,6 +190,14 @@ const PARTNERS = [
     url: "https://www.perforum.info/hrvatska-permakultura/"
   },
   {
+    name: "Pčelarske udruge Istre",
+    name_en: "Istrian beekeeping associations",
+    status: "u-pripremi",
+    desc: "Dogovaramo suradnju oko medonosnog bilja: rubove zona sadnje zasijavamo autohtonim cvjetnim vrstama kao pašu za pčele i druge oprašivače. (Upišite konkretnu udrugu kad suradnja bude potvrđena.)",
+    desc_en: "We are arranging a collaboration on honey plants: the edges of planting zones sown with native flowering species as pasture for bees and other pollinators. (Add the specific association once confirmed.)",
+    url: ""
+  },
+  {
     name: "Školski vrtovi Pula",
     name_en: "School gardens Pula",
     status: "u-pripremi",
