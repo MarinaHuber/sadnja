@@ -1,5 +1,5 @@
 /* =========================================================
-   POSADI STABLO! — podaci o projektima
+   POSADI STABLO!, podaci o projektima
    Ovdje ručno upisujete stabla nakon svake akcije sadnje.
    Karta i brojači na stranici se sami ažuriraju.
    Polja koja završavaju na _en su engleski prijevod;
@@ -15,7 +15,7 @@ const TREE_TYPES = {
   planika: { label: "Planika",                label_en: "Strawberry tree", latin: "Arbutus unedo",    symbol: "🍃", color: "#3f7c5a" }
 };
 
-/* Brojke u hero sekciji — argumenti, ne sadnja.
+/* Brojke u hero sekciji, argumenti, ne sadnja.
    Uredite vrijednosti i oznake po stvarnim podacima. */
 const HERO_STATS = [
   { value: 1240, label: "stabala posječeno od 2024.",     label_en: "trees cut down since 2024" },
@@ -28,8 +28,8 @@ const ZONES = [
     id: "velivrh",
     name: "Veli Vrh",
     tag: "pošumljavanje", tag_en: "reforestation",
-    desc: "Sjeverna četvrt Pule — zapuštene parcele i posječeni pojasevi koje vraćamo zelenilu.",
-    desc_en: "Pula's northern district — neglected plots and clear-cut strips we are bringing back to green.",
+    desc: "Sjeverna četvrt Pule, zapuštene parcele i posječeni pojasevi koje vraćamo zelenilu.",
+    desc_en: "Pula's northern district, neglected plots and clear-cut strips we are bringing back to green.",
     goal: 400,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8885, 13.8565],
@@ -42,8 +42,8 @@ const ZONES = [
     id: "padulj",
     name: "Padulj",
     tag: "park-šuma", tag_en: "forest park",
-    desc: "Brdo iznad Velog Vrha — zemljište za koje se borimo da postane park-šuma, ne gradilište.",
-    desc_en: "The hill above Veli Vrh — land we are fighting to turn into a forest park, not a construction site.",
+    desc: "Brdo iznad Velog Vrha, zemljište za koje se borimo da postane park-šuma, ne gradilište.",
+    desc_en: "The hill above Veli Vrh, land we are fighting to turn into a forest park, not a construction site.",
     goal: 300,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8960, 13.8500],
@@ -56,8 +56,8 @@ const ZONES = [
     id: "pragrande",
     name: "Pragrande",
     tag: "urbana permakultura", tag_en: "urban permaculture",
-    desc: "Zelena dolina u srcu grada — 1.550 građana potpisalo je peticiju za njezinu zaštitu.",
-    desc_en: "A green valley in the heart of the city — 1,550 citizens signed the petition for its protection.",
+    desc: "Zelena dolina u srcu grada, 1.550 građana potpisalo je peticiju za njezinu zaštitu.",
+    desc_en: "A green valley in the heart of the city, 1,550 citizens signed the petition for its protection.",
     goal: 150,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8695, 13.8440],
@@ -68,11 +68,11 @@ const ZONES = [
   },
   {
     id: "citymall",
-    name: "Šijana — kod City Malla",
-    name_en: "Šijana — by City Mall",
+    name: "Šijana, kod City Malla",
+    name_en: "Šijana, by City Mall",
     tag: "urbano zelenilo", tag_en: "urban greenery",
-    desc: "Mali pojas uz trgovački centar — pretvaramo rub parkirališta u sjenu i zelenilo.",
-    desc_en: "A small strip by the shopping centre — turning the parking lot's edge into shade and greenery.",
+    desc: "Mali pojas uz trgovački centar, pretvaramo rub parkirališta u sjenu i zelenilo.",
+    desc_en: "A small strip by the shopping centre, turning the parking lot's edge into shade and greenery.",
     goal: 80,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8715, 13.8600],
@@ -85,8 +85,8 @@ const ZONES = [
     id: "valdebek",
     name: "Valdebek",
     tag: "permakultura", tag_en: "permaculture",
-    desc: "Rubni dio grada s plodnim parcelama — ogledna permakulturna polja i voćnjak.",
-    desc_en: "The city's edge with fertile plots — demonstration permaculture fields and an orchard.",
+    desc: "Rubni dio grada s plodnim parcelama, ogledna permakulturna polja i voćnjak.",
+    desc_en: "The city's edge with fertile plots, demonstration permaculture fields and an orchard.",
     goal: 200,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8525, 13.8695],
@@ -97,11 +97,11 @@ const ZONES = [
   },
   {
     id: "marsovo",
-    name: "Marsovo polje — Mandrač",
-    name_en: "Marsovo polje — Mandrač harbour",
+    name: "Marsovo polje, Mandrač",
+    name_en: "Marsovo polje, Mandrač harbour",
     tag: "edukacija", tag_en: "education",
-    desc: "Prostor uz mandrač — edukativni vrt gdje s građanima i školama učimo saditi autohtono.",
-    desc_en: "The space by the small harbour — an educational garden where citizens and schools learn to plant native species.",
+    desc: "Prostor uz mandrač, edukativni vrt gdje s građanima i školama učimo saditi autohtono.",
+    desc_en: "The space by the small harbour, an educational garden where citizens and schools learn to plant native species.",
     goal: 100,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     center: [44.8660, 13.8370],
@@ -112,7 +112,7 @@ const ZONES = [
   }
 ];
 
-/* Donacijski razredi — iznos u EUR i što pokriva */
+/* Donacijski razredi, iznos u EUR i što pokriva */
 const DONATION_TIERS = [
   { amount: 6,   label: "1 sadnica",  label_en: "1 sapling",
     desc: "jedna autohtona sadnica + kolac i zaštita",
@@ -129,42 +129,42 @@ const DONATION_TIERS = [
 ];
 
 const BANK = {
-  holder: "Građanska inicijativa Posadi stablo! — Pula",
+  holder: "Građanska inicijativa Posadi stablo!, Pula",
   iban: "HR12 2340 0091 0000 0000 0",   // TODO: upišite pravi IBAN
   model: "HR00",
-  desc: "Donacija za sadnju — Pula",
-  desc_en: "Donation for planting — Pula"
+  desc: "Donacija za sadnju, Pula",
+  desc_en: "Donation for planting, Pula"
 };
 
-/* Pravni dokumenti — status: "dobiveno" | "predano" | "u-tijeku" */
+/* Pravni dokumenti, status: "dobiveno" | "predano" | "u-tijeku" */
 const LEGAL_DOCS = [
   {
-    title: "Peticija građana za zaštitu Pragrande — 1.550 potpisa",
-    title_en: "Citizens' petition to protect Pragrande — 1,550 signatures",
+    title: "Peticija građana za zaštitu Pragrande, 1.550 potpisa",
+    title_en: "Citizens' petition to protect Pragrande, 1,550 signatures",
     date: "2026-07-30", status: "predano",
     desc: "1.550 građana potpisalo je zahtjev za zaštitu Pragrande, predan Gradskom vijeću Pule na sjednici Vijeća.",
     desc_en: "1,550 citizens signed the demand to protect Pragrande, submitted to Pula City Council at a Council session.",
     file: "docs/peticija-pragrande.pdf"
   },
   {
-    title: "Elaborat o gradskim česticama — poslan Gradu Puli",
-    title_en: "Study of city-owned parcels — sent to the City of Pula",
+    title: "Elaborat o gradskim česticama, poslan Gradu Puli",
+    title_en: "Study of city-owned parcels, sent to the City of Pula",
     date: "2026-06-19", status: "u-tijeku",
     desc: "Detaljan elaborat o gradskim česticama pogodnima za sadnju i zaštitu, poslan Gradu Puli. Na odgovor čekamo već 4 mjeseca.",
     desc_en: "A detailed study of city-owned parcels suitable for planting and protection, sent to the City of Pula. We have been waiting 4 months for an answer.",
     file: "docs/elaborat-gradske-cestice.pdf"
   },
   {
-    title: "Zahtjev za uvid u katastarske čestice — Veli Vrh",
-    title_en: "Request for access to cadastral parcels — Veli Vrh",
+    title: "Zahtjev za uvid u katastarske čestice, Veli Vrh",
+    title_en: "Request for access to cadastral parcels, Veli Vrh",
     date: "2026-03-14", status: "dobiveno",
     desc: "Izvodi iz katastra i zemljišnih knjiga za k.č. na Velom Vrhu; dokazuju da je zemljište javno dobro.",
     desc_en: "Extracts from the cadastre and land registry for Veli Vrh parcels; they prove the land is a public good.",
     file: "docs/katastar-veli-vrh.pdf"
   },
   {
-    title: "Upravna tužba — ukidanje lokacijske dozvole",
-    title_en: "Administrative lawsuit — annulment of the location permit",
+    title: "Upravna tužba, ukidanje lokacijske dozvole",
+    title_en: "Administrative lawsuit, annulment of the location permit",
     date: "2026-06-19", status: "u-tijeku",
     desc: "Tužba Upravnom sudu u Rijeci protiv lokacijske dozvole izdane bez studije utjecaja na okoliš.",
     desc_en: "Lawsuit before the Administrative Court in Rijeka against a location permit issued without an environmental impact study.",
@@ -180,29 +180,29 @@ const LEGAL_DOCS = [
   }
 ];
 
-/* Suradnja i edukacija — status: "aktivno" | "u-pripremi" | "otvoreno" */
+/* Suradnja i edukacija, status: "aktivno" | "u-pripremi" | "otvoreno" */
 const PARTNERS = [
   {
     name: "Permakultura Hrvatska (PerForum)",
     status: "aktivno",
-    desc: "Nacionalna permakulturna mreža — s njima razvijamo edukacije, radionice dizajna i tečajeve za građane Pule.",
-    desc_en: "The national permaculture network — together we develop education, design workshops and courses for the citizens of Pula.",
+    desc: "Nacionalna permakulturna mreža, s njima razvijamo edukacije, radionice dizajna i tečajeve za građane Pule.",
+    desc_en: "The national permaculture network, together we develop education, design workshops and courses for the citizens of Pula.",
     url: "https://www.perforum.info/hrvatska-permakultura/"
   },
   {
     name: "Školski vrtovi Pula",
     name_en: "School gardens Pula",
     status: "u-pripremi",
-    desc: "Program edukativnih vrtova s osnovnim školama — djeca sade i prate svoje stablo kroz godine. (Dopišite stvarne partnere u data.js.)",
-    desc_en: "A programme of educational gardens with primary schools — children plant a tree and follow it through the years. (Add real partners in data.js.)",
+    desc: "Program edukativnih vrtova s osnovnim školama, djeca sade i prate svoje stablo kroz godine. (Dopišite stvarne partnere u data.js.)",
+    desc_en: "A programme of educational gardens with primary schools, children plant a tree and follow it through the years. (Add real partners in data.js.)",
     url: ""
   },
   {
     name: "Vaša udruga, škola ili rasadnik?",
     name_en: "Your organisation, school or nursery?",
     status: "otvoreno",
-    desc: "Sadite autohtono bilje, obnavljate šume ili vodite edukacije u Istri? Javite se na protivsjece.pula@gmail.com — gradimo zajednički kalendar sadnje.",
-    desc_en: "Do you plant native species, restore forests or run education programmes in Istria? Write to protivsjece.pula@gmail.com — we are building a shared planting calendar.",
+    desc: "Sadite autohtono bilje, obnavljate šume ili vodite edukacije u Istri? Javite se na protivsjece.pula@gmail.com, gradimo zajednički kalendar sadnje.",
+    desc_en: "Do you plant native species, restore forests or run education programmes in Istria? Write to protivsjece.pula@gmail.com, we are building a shared planting calendar.",
     url: ""
   }
 ];
