@@ -356,7 +356,8 @@ document.getElementById("legend-list").innerHTML = Object.values(TREE_TYPES).map
   `<li><i>${t.symbol}</i> <span>${tr(t,"label")} <small>${t.latin}</small></span></li>`).join("");
 
 /* ============ Leaflet map of Pula ============ */
-const map = L.map("map", {scrollWheelZoom:false}).setView([44.874, 13.846], 13);
+const map = L.map("map", {scrollWheelZoom:false});
+map.fitBounds(L.latLngBounds(ZONES.flatMap(z => z.polygon)).pad(0.12));
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
