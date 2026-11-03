@@ -312,7 +312,11 @@ function countUp(el, target, suffix=""){
 }
 document.getElementById("hero-stats").innerHTML = HERO_STATS.map((s,i)=>
   `<div class="stat"><b id="hstat-${i}">0</b><span>${tr(s,"label")}</span></div>`).join("");
-HERO_STATS.forEach((s,i)=> countUp(document.getElementById(`hstat-${i}`), s.value, s.suffix||""));
+HERO_STATS.forEach((s,i)=>{
+  const el = document.getElementById(`hstat-${i}`);
+  if (typeof s.value === "number") countUp(el, s.value, s.suffix||"");
+  else el.textContent = s.value;
+});
 
 /* ============ hero: satellite backdrop zoomed to Pula (radio.garden look) ============ */
 (function heroGlobe(){

@@ -18,9 +18,9 @@ const TREE_TYPES = {
 /* Brojke u hero sekciji, argumenti, ne sadnja.
    Uredite vrijednosti i oznake po stvarnim podacima. */
 const HERO_STATS = [
-  { value: 1240, label: "stabala posječeno od 2024.",     label_en: "trees cut down since 2024" },
   { value: 1550, label: "potpisa za zaštitu Pragrande",   label_en: "signatures to protect Pragrande" },
-  { value: 4,    label: "permakulturnih lokacija",        label_en: "permaculture sites" }
+  { value: 4,    label: "permakulturnih lokacija",        label_en: "permaculture sites" },
+  { value: "?",  label: "stabala posječeno",              label_en: "trees cut down" }
 ];
 
 const ZONES = [
