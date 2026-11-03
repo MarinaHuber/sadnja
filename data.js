@@ -114,16 +114,16 @@ const ZONES = [
 
 /* Donacijski razredi — iznos u EUR i što pokriva */
 const DONATION_TIERS = [
-  { amount: 6,   label: "1 sadnica",  label_en: "1 seedling",
+  { amount: 6,   label: "1 sadnica",  label_en: "1 sapling",
     desc: "jedna autohtona sadnica + kolac i zaštita",
-    desc_en: "one native seedling + stake and protection" },
-  { amount: 30,  label: "5 sadnica",  label_en: "5 seedlings",
+    desc_en: "one native sapling + stake and protection" },
+  { amount: 30,  label: "5 sadnica",  label_en: "5 saplings",
     desc: "red stabala uz stazu na Velom Vrhu",
     desc_en: "a row of trees along the Veli Vrh path" },
-  { amount: 72,  label: "12 sadnica", label_en: "12 seedlings",
+  { amount: 72,  label: "12 sadnica", label_en: "12 saplings",
     desc: "mikro-šumarak s navodnjavanjem prve godine",
     desc_en: "a micro-grove with first-year irrigation" },
-  { amount: 150, label: "25 sadnica", label_en: "25 seedlings",
+  { amount: 150, label: "25 sadnica", label_en: "25 saplings",
     desc: "obnova jedne posječene parcele",
     desc_en: "restoring one clear-cut plot" }
 ];
