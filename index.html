@@ -136,6 +136,10 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .copy-btn{background:transparent; border:1px solid #4caf6f; color:#cfe0cc; font-size:12px; padding:4px 10px; cursor:pointer; text-transform:uppercase; letter-spacing:.08em}
 .copy-btn:hover{background:#2e8b4f; color:var(--ink)}
 .monthly-note{font-size:14px; color:#cfe0cc; margin-top:16px; max-width:70ch}
+.donate .sub-title{color:#f2f6ef}
+.how-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px; margin-top:26px}
+.how-card{background:#174727; border-top:3px solid #ffd23f; padding:18px; font-size:14px; line-height:1.55; color:#cfe0cc}
+.how-card b{display:block; color:#fff; font-size:15px; margin-bottom:8px; text-transform:uppercase; letter-spacing:.05em}
 
 /* ---------- legal ---------- */
 .legal-list{display:grid; gap:0; border:1px solid var(--line); background:var(--card); margin-top:30px}
@@ -244,6 +248,15 @@ footer a{color:var(--green-bright)}
       <div class="row"><label data-i18n="lbl_amount">Iznos</label> <code id="bank-amount">6,00 €</code></div>
     </div>
     <p class="monthly-note" data-i18n="monthly_note">Želite donirati mjesečno ili donirati veći iznos za cijeli šumarak? Pišite nam na <strong>protivsjece.pula@gmail.com</strong> — dogovaramo i sadnju s posvetom.</p>
+
+    <h3 class="sub-title" data-i18n="how_title">Kako sadimo — i zašto stabla prežive</h3>
+    <p class="lede" data-i18n="how_lede">Donacije za sadnju stabala s pravom izazivaju sumnju: strane brzorastuće vrste, plantaže koje se poslije sijeku, sadnice koje se ljeti osuše. Zato radimo ovako:</p>
+    <div class="how-grid">
+      <div class="how-card" data-i18n="how_1"><b>Samo autohtone vrste</b>Sadimo isključivo pet mediteranskih vrsta s popisa iznad, s latinskim imenima i iz lokalnih rasadnika. Nijedna nije za sječu, plantažu ni "offset" — stabla ostaju zauvijek, na javnom zemljištu.</div>
+      <div class="how-card" data-i18n="how_2"><b>Sadnja u kasnu jesen</b>Sadimo u studenom i prosincu, kad počinju kiše — korijen se ukorijeni preko zime pa sadnica dočeka ljeto spremna, a ne u suhoj zemlji.</div>
+      <div class="how-card" data-i18n="how_3"><b>Voda na mediteranski način</b>Oko svake sadnice zdjelica za kišnicu i 10 cm malča protiv isparavanja; na padinama permakulturne grabe (swale) koje zadržavaju oborine. Autohtone vrste nakon ukorjenjivanja žive od kiše.</div>
+      <div class="how-card" data-i18n="how_4"><b>Zalijevanje prva dva ljeta</b>Volonterska subotnja rota zalijeva iz spremnika za kišnicu postavljenih na lokacijama — samo prve dvije godine. Svaka lokacija i broj stabala javno su na karti, pa svatko može provjeriti.</div>
+    </div>
   </div>
 </section>
 
@@ -472,6 +485,17 @@ const UI = {
   btn_copy:{hr:"Kopiraj", en:"Copy"},
   monthly_note:{hr:"Želite donirati mjesečno ili donirati veći iznos za cijeli šumarak? Pišite nam na <strong>protivsjece.pula@gmail.com</strong> — dogovaramo i sadnju s posvetom.",
                 en:"Want to give monthly, or fund a whole grove? Write to <strong>protivsjece.pula@gmail.com</strong> — we also arrange dedication plantings."},
+  how_title:{hr:"Kako sadimo — i zašto stabla prežive", en:"How we plant — and why the trees survive"},
+  how_lede:{hr:"Donacije za sadnju stabala s pravom izazivaju sumnju: strane brzorastuće vrste, plantaže koje se poslije sijeku, sadnice koje se ljeti osuše. Zato radimo ovako:",
+            en:"Tree-planting donations rightly raise doubts: fast-growing foreign species, plantations logged later, saplings that dry out in summer. So this is how we work:"},
+  how_1:{hr:'<b>Samo autohtone vrste</b>Sadimo isključivo pet mediteranskih vrsta s popisa iznad, s latinskim imenima i iz lokalnih rasadnika. Nijedna nije za sječu, plantažu ni "offset" — stabla ostaju zauvijek, na javnom zemljištu.',
+         en:'<b>Native species only</b>We plant only the five Mediterranean species listed above, with Latin names, from local nurseries. None is for logging, plantations or "offsets" — the trees stay forever, on public land.'},
+  how_2:{hr:'<b>Sadnja u kasnu jesen</b>Sadimo u studenom i prosincu, kad počinju kiše — korijen se ukorijeni preko zime pa sadnica dočeka ljeto spremna, a ne u suhoj zemlji.',
+         en:'<b>Planting in late autumn</b>We plant in November and December, when the rains begin — roots establish over winter, so the sapling meets summer ready, not in dry soil.'},
+  how_3:{hr:'<b>Voda na mediteranski način</b>Oko svake sadnice zdjelica za kišnicu i 10 cm malča protiv isparavanja; na padinama permakulturne grabe (swale) koje zadržavaju oborine. Autohtone vrste nakon ukorjenjivanja žive od kiše.',
+         en:'<b>Water the Mediterranean way</b>Around every sapling a rain basin and 10 cm of mulch against evaporation; on slopes, permaculture swales that hold the rainfall. Once established, native species live on rain alone.'},
+  how_4:{hr:'<b>Zalijevanje prva dva ljeta</b>Volonterska subotnja rota zalijeva iz spremnika za kišnicu postavljenih na lokacijama — samo prve dvije godine. Svaka lokacija i broj stabala javno su na karti, pa svatko može provjeriti.',
+         en:'<b>Watering for the first two summers</b>A volunteer Saturday rota waters from rainwater tanks placed on site — only for the first two years. Every location and tree count is public on the map, so anyone can verify.'},
   col_eyebrow:{hr:"Zajedno za zeleno", en:"Together for green"},
   col_title:{hr:"Elaborati i suradnje", en:"Studies & collaborations"},
   col_lede:{hr:"Ne radimo sami. Povezujemo se s organizacijama koje sade autohtono bilje i obnavljaju šume, a kroz radionice i tečajeve permakulture prenosimo znanje građanima Pule.",
