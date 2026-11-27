@@ -117,6 +117,9 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .zone-card .nums .pct{color:#3ce07a}
 .tree-grid{line-height:1.35; font-size:15px; letter-spacing:2px; word-break:break-all}
 .tree-grid span{cursor:default}
+.soon-badge{display:inline-block; vertical-align:middle; margin-left:10px; font-family:var(--body); font-size:13px; font-weight:700; letter-spacing:.1em; color:#0f2a18; background:#7cc8f2; padding:4px 10px; transform:rotate(-3deg)}
+.wish-card{border-top-color:#7cc8f2}
+.zone-tag.water{color:#7cc8f2; border-color:#7cc8f2}
 
 /* ---------- donation ---------- */
 .donate{background:var(--green); color:#f2f6ef}
@@ -255,10 +258,13 @@ footer a{color:var(--green-bright)}
       <aside class="legend">
         <h3 data-i18n="legend_title">Vrste koje sadimo</h3>
         <ul id="legend-list"></ul>
-        <p class="map-note" data-i18n="map_note">Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja.</p>
+        <p class="map-note" data-i18n="map_note">Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su lokacije s liste želja.</p>
       </aside>
     </div>
     <div class="zone-cards" id="zone-cards"></div>
+    <h3 class="sub-title" data-i18n="wish_title">Lista želja <span class="soon-badge">Uskoro!</span></h3>
+    <p class="lede" data-i18n="wish_lede">Sljedeće lokacije su uz vodu i izvore, pa ih je puno lakše zalijevati i održavati.</p>
+    <div class="zone-cards" id="wish-cards"></div>
   </div>
 </section>
 
@@ -283,7 +289,7 @@ footer a{color:var(--green-bright)}
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="data.js?v=8"></script>
+<script src="data.js?v=9"></script>
 <script>
 /* ============ language (HR default; toggle reloads with saved choice) ============ */
 let lang = "hr";
@@ -292,8 +298,8 @@ document.documentElement.lang = lang;
 /* field with _en suffix when English, falling back to Croatian */
 const tr = (o, f) => (lang === "en" && o[f + "_en"]) ? o[f + "_en"] : o[f];
 const W = lang === "en"
-  ? { trees:"trees", notStarted:"Planting has not started yet.", joinFirst:"Planting has not started yet, join the first action.", visit:"Visit", copied:"Copied ✓" }
-  : { trees:"stabala", notStarted:"Sadnja još nije počela.", joinFirst:"Sadnja još nije počela. Pridružite se prvoj akciji!", visit:"Posjeti", copied:"Kopirano ✓" };
+  ? { trees:"trees", notStarted:"Planting has not started yet.", joinFirst:"Planting has not started yet, join the first action.", visit:"Visit", copied:"Copied ✓", water:"by the water", soon:"Wish list, coming up!" }
+  : { trees:"stabala", notStarted:"Sadnja još nije počela.", joinFirst:"Sadnja još nije počela. Pridružite se prvoj akciji!", visit:"Posjeti", copied:"Kopirano ✓", water:"uz vodu", soon:"Lista želja, uskoro!" };
 
 /* ============ helpers ============ */
 const sum = o => Object.values(o).reduce((a,b)=>a+b,0);
@@ -361,7 +367,7 @@ document.getElementById("legend-list").innerHTML = Object.values(TREE_TYPES).map
 
 /* ============ Leaflet map of Pula ============ */
 const map = L.map("map", {scrollWheelZoom:false});
-map.fitBounds(L.latLngBounds(ZONES.flatMap(z => z.polygon)).pad(0.12));
+map.fitBounds(L.latLngBounds([...ZONES.flatMap(z => z.polygon), ...WISHLIST.map(w => w.center)]).pad(0.12));
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 18,
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
@@ -397,6 +403,18 @@ ZONES.forEach(z => {
   poly.bindTooltip(`${tr(z,"name")}, ${Math.round(pct*100)} %`, {sticky:true});
 });
 
+/* wish-list sites: dashed blue circles, not counted in goals */
+WISHLIST.forEach(w => {
+  L.circle(w.center, {
+    radius: w.radius, color:"#2b7bb9", weight:2.5, dashArray:"6 6",
+    fillColor:"#7cc8f2", fillOpacity:0.18
+  }).addTo(map)
+    .bindTooltip(`${tr(w,"name")}, ${W.soon}`, {sticky:true})
+    .bindPopup(`<div class="popup-title">${tr(w,"name")}</div>
+      <div class="popup-trees">${tr(w,"desc")}</div>
+      <div class="popup-pct">${W.soon}</div>`);
+});
+
 /* ============ zone cards ============ */
 document.getElementById("zone-cards").innerHTML = ZONES.map(z=>{
   const pct = Math.round(zonePct(z)*100);
@@ -409,6 +427,12 @@ document.getElementById("zone-cards").innerHTML = ZONES.map(z=>{
     <div class="tree-grid">${treeSymbols(z) || `<span style="letter-spacing:0;font-size:13px;color:#9fd0ab">${W.joinFirst}</span>`}</div>
   </article>`;
 }).join("");
+
+document.getElementById("wish-cards").innerHTML = WISHLIST.map(w=>`<article class="zone-card wish-card">
+    <h3>${tr(w,"name")}</h3>
+    <span class="zone-tag water">${W.water}</span>
+    <p class="desc">${tr(w,"desc")}</p>
+  </article>`).join("");
 
 /* ============ donation tiers ============ */
 const tiersEl = document.getElementById("tiers");
@@ -480,8 +504,11 @@ const UI = {
   map_lede:{hr:"Od pošumljavanja Velog Vrha do pilot-parcele na Verudi, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.",
             en:"From reforesting Veli Vrh to the pilot plot in Veruda, every project is a zone on the map. Zones fill with green as planting progresses; click a zone for details. One tree, one symbol."},
   legend_title:{hr:"Vrste koje sadimo", en:"Species we plant"},
-  map_note:{hr:"Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja.",
-            en:"Zone borders are approximate, for orientation only. Green intensity = share of the goal reached."},
+  map_note:{hr:"Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su lokacije s liste želja.",
+            en:"Zone borders are approximate, for orientation only. Green intensity = share of the goal reached. Dashed blue circles are wish-list sites."},
+  wish_title:{hr:'Lista želja <span class="soon-badge">Uskoro!</span>', en:'Wish list <span class="soon-badge">Coming up!</span>'},
+  wish_lede:{hr:"Sljedeće lokacije su uz vodu i izvore, pa ih je puno lakše zalijevati i održavati.",
+             en:"These next sites are by water and springs, which makes them much easier to water and maintain."},
   don_eyebrow:{hr:"Donacije", en:"Donations"},
   don_title:{hr:"Jedna sadnica: 6 €", en:"One sapling: €6"},
   don_lede:{hr:"Donacijama pokrivate sadnice iz lokalnih rasadnika, kolce, zaštitu od divljači i vodu za prva sušna razdoblja. Svaki trošak javno objavljujemo, a fotografije i priče sa svake sadnje dijelimo na našoj Facebook stranici. Pratite kako vaša stabla rastu!",

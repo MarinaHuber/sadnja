@@ -74,6 +74,36 @@ const ZONES = [
   }
 ];
 
+/* Lista želja: lokacije uz vodu i izvore, uskoro.
+   Na karti su isprekidani plavi krugovi. Položaji su približni:
+   center = [lat, lon], radius = polumjer kruga u metrima. */
+const WISHLIST = [
+  {
+    id: "paganorsko-jezero",
+    name: "Paganorsko jezero",
+    name_en: "Paganor lake",
+    desc: "Jezerce uz ulicu Fojba, u šumarku između Paganorske ulice i Fažanske ceste.",
+    desc_en: "A small lake by Fojba street, in the wood between Paganorska street and Fažanska cesta.",
+    center: [44.8942, 13.8440], radius: 70
+  },
+  {
+    id: "velovrski-potok",
+    name: "Velovrški potok",
+    name_en: "Veli Vrh stream",
+    desc: "Izvorište potoka na Mandraču, na dnu uvale Vela draga.",
+    desc_en: "The stream's spring at Mandrač, at the head of Vela draga bay.",
+    center: [44.8852, 13.8484], radius: 70
+  },
+  {
+    id: "mandracko-priobalje",
+    name: "Mandračko priobalje",
+    name_en: "Mandrač shore",
+    desc: "Obala Mandrača kod lučice i mosta Valelunga.",
+    desc_en: "The Mandrač shore by the small harbour and the Valelunga bridge.",
+    center: [44.8839, 13.8472], radius: 90
+  }
+];
+
 /* Donacijski razredi, iznos u EUR i što pokriva */
 const DONATION_TIERS = [
   { amount: 6,   label: "1 sadnica",  label_en: "1 sapling",
