@@ -168,6 +168,23 @@ footer{background:var(--ink); color:#9aa095; padding-block:40px; font-size:14px}
 footer .wrap{display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap}
 footer a{color:var(--green-bright)}
 
+/* ---------- floating "Doniraj" badge: hand holding a sapling ---------- */
+.donate-badge{position:fixed; right:18px; bottom:18px; z-index:1100; display:flex; align-items:center;
+  text-decoration:none; transform:rotate(-4deg); transition:transform .18s ease, opacity .25s ease;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}
+.donate-badge svg{width:64px; height:64px; position:relative; z-index:1; flex:none}
+.donate-badge span{margin-left:-16px; padding:9px 16px 8px 24px; background:#3ce07a; color:var(--ink);
+  border:3px solid var(--ink); font-family:var(--display); font-size:20px; letter-spacing:.06em;
+  text-transform:uppercase; line-height:1}
+.donate-badge:hover, .donate-badge:focus-visible{transform:rotate(0deg) scale(1.05)}
+.donate-badge.is-hidden{opacity:0; pointer-events:none; transform:rotate(-4deg) translateY(14px)}
+@media (max-width:600px){
+  .donate-badge{right:12px; bottom:12px}
+  .donate-badge svg{width:54px; height:54px}
+  .donate-badge span{font-size:17px; padding:8px 12px 7px 20px}
+}
+@media (prefers-reduced-motion:reduce){ .donate-badge{transition:none} }
+
 .leaflet-popup-content{font-family:var(--body)}
 .popup-title{font-weight:700; font-size:15px; margin-bottom:4px}
 .popup-trees{font-size:14px; line-height:1.5}
@@ -289,6 +306,20 @@ footer a{color:var(--green-bright)}
     <div data-i18n="foot_right">Pridružite se sljedećoj sadnji, najava na našoj stranici.</div>
   </div>
 </footer>
+
+<a class="donate-badge" href="#donacije">
+  <svg viewBox="0 0 64 64" aria-hidden="true">
+    <circle cx="32" cy="32" r="29" fill="#1e5c33" stroke="#191d18" stroke-width="3"/>
+    <path d="M32 41V23" stroke="#191d18" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+    <path d="M32 31C24 31 18.5 25.5 18.5 18C26 18 32 23.5 32 31Z" fill="#3ce07a" stroke="#191d18" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M32 26C32.5 18 38.5 12.5 46 12.5C46 20.5 40 26 32 26Z" fill="#3ce07a" stroke="#191d18" stroke-width="2" stroke-linejoin="round"/>
+    <ellipse cx="32" cy="41.5" rx="10" ry="3.6" fill="#7a5230" stroke="#191d18" stroke-width="2"/>
+    <path d="M14.6 39.2C13.4 35.2 15.9 32.4 19 33.4C21.1 34.1 22 36.4 20.8 39.6" fill="#f7f5ef" stroke="#191d18" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M12.5 39.5C16 47.5 23.5 51.5 32 51.5C41.5 51.5 48.5 47 52.5 40.5C53.3 39.2 52 37.8 50.6 38.6L47 40.7C42.5 43.6 37.5 45 32 45C25.5 45 20 43.2 15.8 38.6C14.6 37.3 12 37.9 12.5 39.5Z" fill="#f7f5ef" stroke="#191d18" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M40 47.6C42 46.9 44 45.9 45.8 44.6M36 49.2C38.5 48.9 41 48.1 43.2 47" stroke="#191d18" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+  </svg>
+  <span data-i18n="badge_donate">Doniraj</span>
+</a>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="data.js?v=9"></script>
@@ -546,12 +577,22 @@ const UI = {
   foot_left:{hr:'© 2026 Građanska inicijativa Posadi stablo! Pula · <a href="#suradnja">Suradnja</a> · Član mreže <a href="https://www.perforum.info/hrvatska-permakultura/" target="_blank" rel="noopener">Permakultura Hrvatska</a>',
              en:'© 2026 Citizens\' initiative Posadi stablo! (Plant a tree!) Pula · <a href="#suradnja">Collaboration</a> · Member of the <a href="https://www.perforum.info/hrvatska-permakultura/" target="_blank" rel="noopener">Permaculture Croatia</a> network'},
   foot_right:{hr:"Pridružite se sljedećoj sadnji, najava na našoj stranici.",
-              en:"Join the next planting, announced on this page."}
+              en:"Join the next planting, announced on this page."},
+  badge_donate:{hr:"Doniraj", en:"Donate"}
 };
 document.querySelectorAll("[data-i18n]").forEach(el=>{
   const t = UI[el.dataset.i18n];
   if(t && t[lang]) el.innerHTML = t[lang];
 });
+
+/* floating badge steps aside while the donation section itself is on screen */
+(function(){
+  const badge = document.querySelector(".donate-badge"), don = document.getElementById("donacije");
+  if(!badge || !don || !("IntersectionObserver" in window)) return;
+  /* hidden while the donation section crosses the middle of the screen */
+  new IntersectionObserver(([e]) => badge.classList.toggle("is-hidden", e.isIntersecting),
+    {rootMargin:"-50% 0px -50% 0px", threshold:0}).observe(don);
+})();
 
 /* ============ HR/EN toggle (saves choice, reloads to re-render everything) ============ */
 document.querySelectorAll(".lang-toggle button").forEach(b=>{
