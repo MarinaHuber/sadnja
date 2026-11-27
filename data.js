@@ -19,7 +19,7 @@ const TREE_TYPES = {
    Uredite vrijednosti i oznake po stvarnim podacima. */
 const HERO_STATS = [
   { value: 1550, label: "potpisa za zaštitu Pragrande",   label_en: "signatures to protect Pragrande" },
-  { value: 4,    label: "permakulturnih lokacija",        label_en: "permaculture sites" },
+  { value: 6,    label: "permakulturnih lokacija",        label_en: "permaculture sites" },
   { value: "?",  label: "stabala posječeno",              label_en: "trees cut down" }
 ];
 
