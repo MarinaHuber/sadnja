@@ -117,7 +117,9 @@ nav a.donate-link{background:var(--green-bright); color:var(--ink); padding:6px 
 .zone-card .nums .pct{color:#3ce07a}
 .tree-grid{line-height:1.35; font-size:15px; letter-spacing:2px; word-break:break-all}
 .tree-grid span{cursor:default}
-.soon-badge{display:inline-block; vertical-align:middle; margin-left:10px; font-family:var(--body); font-size:13px; font-weight:700; letter-spacing:.1em; color:#0f2a18; background:#7cc8f2; padding:4px 10px; transform:rotate(-3deg)}
+.sub-title.small{font-size:clamp(18px,2.2vw,22px); margin:44px 0 10px}
+.lede.small{font-size:15px; max-width:70ch}
+.soon-badge{display:inline-block; vertical-align:middle; margin-left:10px; font-family:var(--body); font-size:11px; font-weight:700; letter-spacing:.1em; color:#0f2a18; background:#7cc8f2; padding:3px 8px; transform:rotate(-3deg)}
 .wish-card{border-top-color:#7cc8f2}
 .zone-tag.water{color:#7cc8f2; border-color:#7cc8f2}
 
@@ -258,12 +260,12 @@ footer a{color:var(--green-bright)}
       <aside class="legend">
         <h3 data-i18n="legend_title">Vrste koje sadimo</h3>
         <ul id="legend-list"></ul>
-        <p class="map-note" data-i18n="map_note">Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su lokacije s liste želja.</p>
+        <p class="map-note" data-i18n="map_note">Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su sljedeće lokacije uz vodu.</p>
       </aside>
     </div>
     <div class="zone-cards" id="zone-cards"></div>
-    <h3 class="sub-title" data-i18n="wish_title">Lista želja <span class="soon-badge">Uskoro!</span></h3>
-    <p class="lede" data-i18n="wish_lede">Sljedeće lokacije su uz vodu i izvore, pa ih je puno lakše zalijevati i održavati.</p>
+    <h3 class="sub-title small" data-i18n="wish_title">Sljedeće lokacije <span class="soon-badge">Uskoro!</span></h3>
+    <p class="lede small" data-i18n="wish_lede">Sljedeće lokacije su uz vodu i izvore, pa ih je puno lakše zalijevati i održavati.</p>
     <div class="zone-cards" id="wish-cards"></div>
   </div>
 </section>
@@ -298,8 +300,8 @@ document.documentElement.lang = lang;
 /* field with _en suffix when English, falling back to Croatian */
 const tr = (o, f) => (lang === "en" && o[f + "_en"]) ? o[f + "_en"] : o[f];
 const W = lang === "en"
-  ? { trees:"trees", notStarted:"Planting has not started yet.", joinFirst:"Planting has not started yet, join the first action.", visit:"Visit", copied:"Copied ✓", water:"by the water", soon:"Wish list, coming up!" }
-  : { trees:"stabala", notStarted:"Sadnja još nije počela.", joinFirst:"Sadnja još nije počela. Pridružite se prvoj akciji!", visit:"Posjeti", copied:"Kopirano ✓", water:"uz vodu", soon:"Lista želja, uskoro!" };
+  ? { trees:"trees", notStarted:"Planting has not started yet.", joinFirst:"Planting has not started yet, join the first action.", visit:"Visit", copied:"Copied ✓", water:"by the water", soon:"coming up", soonTitle:"Coming up!" }
+  : { trees:"stabala", notStarted:"Sadnja još nije počela.", joinFirst:"Sadnja još nije počela. Pridružite se prvoj akciji!", visit:"Posjeti", copied:"Kopirano ✓", water:"uz vodu", soon:"uskoro", soonTitle:"Uskoro!" };
 
 /* ============ helpers ============ */
 const sum = o => Object.values(o).reduce((a,b)=>a+b,0);
@@ -403,7 +405,7 @@ ZONES.forEach(z => {
   poly.bindTooltip(`${tr(z,"name")}, ${Math.round(pct*100)} %`, {sticky:true});
 });
 
-/* wish-list sites: dashed blue circles, not counted in goals */
+/* next sites by the water: dashed blue circles, not counted in goals */
 WISHLIST.forEach(w => {
   L.circle(w.center, {
     radius: w.radius, color:"#2b7bb9", weight:2.5, dashArray:"6 6",
@@ -412,7 +414,7 @@ WISHLIST.forEach(w => {
     .bindTooltip(`${tr(w,"name")}, ${W.soon}`, {sticky:true})
     .bindPopup(`<div class="popup-title">${tr(w,"name")}</div>
       <div class="popup-trees">${tr(w,"desc")}</div>
-      <div class="popup-pct">${W.soon}</div>`);
+      <div class="popup-pct">${W.soonTitle}</div>`);
 });
 
 /* ============ zone cards ============ */
@@ -504,9 +506,9 @@ const UI = {
   map_lede:{hr:"Od pošumljavanja Velog Vrha do pilot-parcele na Verudi, svaki je projekt zona na karti. Kako sadnja bude napredovala, zone će se puniti zelenom bojom; kliknite na zonu za detalje.",
             en:"From reforesting Veli Vrh to the pilot plot in Veruda, every project is a zone on the map. Zones fill with green as planting progresses; click a zone for details. One tree, one symbol."},
   legend_title:{hr:"Vrste koje sadimo", en:"Species we plant"},
-  map_note:{hr:"Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su lokacije s liste želja.",
-            en:"Zone borders are approximate, for orientation only. Green intensity = share of the goal reached. Dashed blue circles are wish-list sites."},
-  wish_title:{hr:'Lista želja <span class="soon-badge">Uskoro!</span>', en:'Wish list <span class="soon-badge">Coming up!</span>'},
+  map_note:{hr:"Granice zona približne su i služe za orijentaciju. Intenzitet zelene boje označava postotak ostvarenog cilja. Isprekidani plavi krugovi su sljedeće lokacije uz vodu.",
+            en:"Zone borders are approximate, for orientation only. Green intensity = share of the goal reached. Dashed blue circles are the next sites by the water."},
+  wish_title:{hr:'Sljedeće lokacije <span class="soon-badge">Uskoro!</span>', en:'Next sites <span class="soon-badge">Coming up!</span>'},
   wish_lede:{hr:"Sljedeće lokacije su uz vodu i izvore, pa ih je puno lakše zalijevati i održavati.",
              en:"These next sites are by water and springs, which makes them much easier to water and maintain."},
   don_eyebrow:{hr:"Donacije", en:"Donations"},

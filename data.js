@@ -74,7 +74,7 @@ const ZONES = [
   }
 ];
 
-/* Lista želja: lokacije uz vodu i izvore, uskoro.
+/* Sljedeće lokacije: uz vodu i izvore, uskoro.
    Na karti su isprekidani plavi krugovi. Položaji su približni:
    center = [lat, lon], radius = polumjer kruga u metrima. */
 const WISHLIST = [
