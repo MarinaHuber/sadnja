@@ -25,25 +25,11 @@ const HERO_STATS = [
 
 const ZONES = [
   {
-    id: "velivrh",
-    name: "Veli Vrh",
-    tag: "pošumljavanje", tag_en: "reforestation",
-    desc: "Sjeverna gradska četvrt: zapuštene parcele i posječeni pojasevi koje vraćamo zelenilu.",
-    desc_en: "Pula's northern district, neglected plots and clear-cut strips we are bringing back to green.",
-    goal: 400,
-    planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
-    center: [44.8885, 13.8565],
-    polygon: [
-      [44.8930, 13.8520], [44.8925, 13.8615], [44.8870, 13.8640],
-      [44.8838, 13.8565], [44.8870, 13.8500]
-    ]
-  },
-  {
-    id: "padulj",
-    name: "Padulj",
+    id: "paganor-padulj",
+    name: "Paganor-Padulj",
     tag: "park-šuma", tag_en: "forest park",
-    desc: "Brdo iznad Velog Vrha: zemljište za koje se borimo da postane park-šuma, a ne gradilište.",
-    desc_en: "The hill above Veli Vrh, land we are fighting to turn into a forest park, not a construction site.",
+    desc: "Dio četvrti Veli Vrh, uz Sponzinu: zapuštene i posječene površine za koje se borimo da postanu park-šuma, a ne gradilište.",
+    desc_en: "Part of the Veli Vrh district, by Sponzina street: neglected and clear-cut land we are fighting to turn into a forest park, not a construction site.",
     goal: 300,
     planted: { cesmina: 0, bor: 0, lovor: 0, maslina: 0, planika: 0 },
     /* šumarak između Fažanske ceste, Paduljskog puta (uz Sponzinu) i D75 */
