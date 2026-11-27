@@ -341,9 +341,9 @@ const totalGoal = ZONES.reduce((a,z)=>a+z.goal,0);
 
 /* ============ hero stats (count-up, from HERO_STATS in data.js) ============ */
 function countUp(el, target, suffix=""){
-  const dur = 1200, t0 = performance.now();
+  const dur = 3000, t0 = performance.now();   /* ms; slower count-up on landing */
   function tick(t){
-    const p = Math.min(1,(t-t0)/dur), eased = 1-Math.pow(1-p,3);
+    const p = Math.min(1,(t-t0)/dur), eased = 1-Math.pow(1-p,2);
     el.textContent = Math.round(target*eased).toLocaleString("hr-HR") + suffix;
     if(p<1) requestAnimationFrame(tick);
   }
